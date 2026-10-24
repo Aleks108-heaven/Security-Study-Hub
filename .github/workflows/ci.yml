@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install test dependencies
+        run: npm ci
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Dataset checks, translation checks, build and tests
+        run: npm run verify
+
+      - name: Checksums of the dataset package
+        run: sha256sum -c SHA256SUMS.txt
+
+      - name: Keep the build for publishing as a claude.ai artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: study-hub-build
+          path: |
+            dist/hub-app.html
+            dist/hub-app.test.html
+            dist/csp-header.txt
+          if-no-files-found: error

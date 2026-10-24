@@ -1,0 +1,280 @@
+{
+ "testcases": {
+  "LOGIN-01": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Anmeldung",
+   "test": "Mit gültigen Zugangsdaten anmelden",
+   "expected": "Erfolg; eine neue Sitzungs-ID wird ausgestellt; keine Geheimnisse sichtbar"
+  },
+  "LOGIN-02": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Anmeldung",
+   "test": "Mit falschem Passwort anmelden, dann mit einem unbekannten Benutzer",
+   "expected": "Gleiche Meldung und ähnliche Antwortzeit für beide; keine Kontoaufzählung"
+  },
+  "LOGIN-03": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Anmeldung",
+   "test": "Die Anmeldung N-1, N und N+1 Mal fehlschlagen lassen, wobei N die Sperrschwelle ist",
+   "expected": "Drosselung oder Sperre beginnt an der definierten Schwelle; der echte Benutzer kann sich erholen; die Sperre lässt sich nicht leicht für Denial of Service missbrauchen"
+  },
+  "LOGIN-04": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Anmeldung",
+   "test": "Passwörter mit 7, 8, 14, 15, 64 und 65 Zeichen setzen, mit Leerzeichen und Unicode",
+   "expected": "Regeln entsprechen der Richtlinie (SP 800-63B-4: mindestens 15 bei einem Faktor, 8 mit MFA, 64 oder mehr akzeptiert); keine Zusammensetzungsregeln"
+  },
+  "LOGIN-05": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Anmeldung",
+   "test": "Ein Passwort aus einer öffentlichen Leak-Liste setzen",
+   "expected": "Mit klarer Meldung abgelehnt"
+  },
+  "LOGIN-06": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Anmeldung",
+   "test": "Zugangsdaten über reines HTTP senden, dann Weiterleitungen und Header prüfen",
+   "expected": "Keine Zugangsdaten über HTTP akzeptiert; HTTPS erzwungen; HSTS vorhanden"
+  },
+  "LOGIN-07": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Anmeldung",
+   "test": "Bei aktivem MFA eine Seite nach der Anmeldung direkt aufrufen, ohne den zweiten Schritt abzuschließen",
+   "expected": "Zugriff verweigert, bis der zweite Faktor erledigt ist"
+  },
+  "RESET-01": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Passwort-Zurücksetzung",
+   "test": "Eine Zurücksetzung für ein gültiges und für ein unbekanntes Konto anfordern",
+   "expected": "Identische allgemeine Antwort; Einmal-Link mit begrenzter Gültigkeit"
+  },
+  "RESET-02": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Passwort-Zurücksetzung",
+   "test": "Einen Zurücksetzungslink erneut verwenden; einen abgelaufenen verwenden; einen vor der Passwortänderung ausgestellten verwenden",
+   "expected": "Jedes Mal abgelehnt"
+  },
+  "RESET-03": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Passwort-Zurücksetzung",
+   "test": "Das Token oder die Benutzerkennung im Zurücksetzungslink verändern",
+   "expected": "Abgelehnt; keine Informationen über das Konto"
+  },
+  "RESET-04": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Passwort-Zurücksetzung",
+   "test": "Viele Zurücksetzungen für ein Konto anfordern, dann für viele Konten",
+   "expected": "Ratenbegrenzt; ältere Tokens ungültig; Benutzer benachrichtigt"
+  },
+  "SESS-01": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Sitzungen",
+   "test": "Anmelden und das Sitzungs-Cookie untersuchen",
+   "expected": "Secure, HttpOnly und SameSite gesetzt; unvorhersehbarer Wert"
+  },
+  "SESS-02": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Sitzungen",
+   "test": "Eine alte Sitzungs-ID nach Abmeldung und nach einer Passwortänderung erneut verwenden",
+   "expected": "Abgelehnt: Die Ungültigmachung geschieht auf dem Server"
+  },
+  "SESS-03": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Sitzungen",
+   "test": "Eine Minute vor und eine Minute nach den Leerlauf- und absoluten Zeitlimits handeln",
+   "expected": "Die Sitzung endet an den konfigurierten Grenzen"
+  },
+  "SESS-04": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Sitzungen",
+   "test": "Vor der Anmeldung eine bekannte Sitzungs-ID setzen, dann anmelden",
+   "expected": "Bei der Anmeldung wird eine neue ID ausgestellt; die alte ist ungültig"
+  },
+  "SESS-05": {
+   "group": "Authentifizierung, Wiederherstellung und Sitzungen",
+   "feature": "Sitzungen",
+   "test": "Eine zustandsändernde Anfrage von einem anderen Ursprung ohne Anti-CSRF-Schutz senden",
+   "expected": "Anfrage verweigert"
+  },
+  "AC-01": {
+   "group": "Zugriffskontrolle und APIs",
+   "feature": "Zugriffskontrolle",
+   "test": "Als Benutzer A den Datensatz von Benutzer B anfordern, indem die Kennung geändert wird",
+   "expected": "403 oder 404; keine Daten zurückgegeben"
+  },
+  "AC-02": {
+   "group": "Zugriffskontrolle und APIs",
+   "feature": "Zugriffskontrolle",
+   "test": "Als Benutzer mit niedrigen Rechten eine administrative Funktion über die UI-Route und die API aufrufen",
+   "expected": "403; Aktion nicht ausgeführt; Versuch protokolliert"
+  },
+  "AC-03": {
+   "group": "Zugriffskontrolle und APIs",
+   "feature": "Zugriffskontrolle",
+   "test": "Ohne Anmeldung geschützte Seiten und Dateien direkt anfordern",
+   "expected": "401 oder Weiterleitung; kein Inhalt"
+  },
+  "AC-04": {
+   "group": "Zugriffskontrolle und APIs",
+   "feature": "Zugriffskontrolle",
+   "test": "Unerwartete Felder wie role, isAdmin oder price zu einer Profilaktualisierung hinzufügen",
+   "expected": "Ignoriert oder abgelehnt; gespeicherte Werte unverändert"
+  },
+  "AC-05": {
+   "group": "Zugriffskontrolle und APIs",
+   "feature": "Zugriffskontrolle",
+   "test": "Export, Suche, Berichte, Anhänge, Caches und WebSockets auf Objekte anderer Benutzer oder Mandanten prüfen",
+   "expected": "Gleiche Autorisierung wie im Hauptpfad"
+  },
+  "AC-06": {
+   "group": "Zugriffskontrolle und APIs",
+   "feature": "Zugriffskontrolle",
+   "test": "Die Rolle eines Benutzers herabstufen und dann eine unter der alten Rolle gestellte Anfrage erneut senden",
+   "expected": "Sofort verweigert"
+  },
+  "API-01": {
+   "group": "Zugriffskontrolle und APIs",
+   "feature": "API",
+   "test": "Eine Anfrage mehr senden, als das Ratenlimit erlaubt",
+   "expected": "429 mit Hinweis zum erneuten Versuch; Limit gilt pro Benutzer oder Schlüssel"
+  },
+  "API-02": {
+   "group": "Zugriffskontrolle und APIs",
+   "feature": "API",
+   "test": "Die Nutzdaten eines signierten Tokens verändern und senden",
+   "expected": "401; Signatur und Claims werden validiert"
+  },
+  "API-03": {
+   "group": "Zugriffskontrolle und APIs",
+   "feature": "API",
+   "test": "Eine ältere API-Version oder einen im Datenverkehr gesehenen undokumentierten Endpunkt aufrufen",
+   "expected": "Deaktiviert oder wie die aktuelle Version geschützt"
+  },
+  "API-04": {
+   "group": "Zugriffskontrolle und APIs",
+   "feature": "API",
+   "test": "Den falschen Inhaltstyp, falsche JSON-Typen, ein riesiges Array und doppelte Schlüssel senden",
+   "expected": "Saubere 4xx-Antwort; kein Stacktrace; kein Absturz"
+  },
+  "INP-01": {
+   "group": "Eingabeverarbeitung, Dateien und Zahlungen",
+   "feature": "Eingabeverarbeitung",
+   "test": "In jedem Textfeld leer, 1 Zeichen, Maximallänge, Maximum plus eins, sehr lang, Unicode und gemischte Kodierungen ausprobieren",
+   "expected": "Validierung auf dem Server; saubere Fehlermeldung; keine stille Kürzung oder Beschädigung"
+  },
+  "INP-02": {
+   "group": "Eingabeverarbeitung, Dateien und Zahlungen",
+   "feature": "Eingabeverarbeitung",
+   "test": "In jedes Feld Anführungszeichen, spitze Klammern, Vorlagen- und Pfadzeichen eingeben und Antworten sowie gerenderte Ausgabe beobachten",
+   "expected": "Als Daten behandelt; keine Interpreterfehler; Ausgabe für ihren Kontext kodiert"
+  },
+  "INP-03": {
+   "group": "Eingabeverarbeitung, Dateien und Zahlungen",
+   "feature": "Eingabeverarbeitung",
+   "test": "Eine harmlose Markierungszeichenfolge mit Markup-Zeichen in Namen und Kommentaren speichern und als anderer Benutzer ansehen",
+   "expected": "Als Text angezeigt, nie ausgeführt"
+  },
+  "INP-04": {
+   "group": "Eingabeverarbeitung, Dateien und Zahlungen",
+   "feature": "Eingabeverarbeitung",
+   "test": "In einem Labor URL-artigen Parametern (Webhook, Import, Bildabruf) lokale und interne Adressen geben",
+   "expected": "Durch eine Positivliste blockiert"
+  },
+  "FILE-01": {
+   "group": "Eingabeverarbeitung, Dateien und Zahlungen",
+   "feature": "Datei-Upload",
+   "test": "Eine gültige Datei genau an der Größengrenze hochladen",
+   "expected": "Akzeptiert und sicher gespeichert"
+  },
+  "FILE-02": {
+   "group": "Eingabeverarbeitung, Dateien und Zahlungen",
+   "feature": "Datei-Upload",
+   "test": "Das Limit plus ein Byte sowie eine Datei mit null Byte hochladen",
+   "expected": "Mit klarer Fehlermeldung abgelehnt"
+  },
+  "FILE-03": {
+   "group": "Eingabeverarbeitung, Dateien und Zahlungen",
+   "feature": "Datei-Upload",
+   "test": "Einen nicht erlaubten Typ, eine doppelte Endung und eine Datei hochladen, deren Inhalt nicht zum angegebenen Typ passt",
+   "expected": "Auf dem Server nach Inhalt abgelehnt, nicht nur nach Name"
+  },
+  "FILE-04": {
+   "group": "Eingabeverarbeitung, Dateien und Zahlungen",
+   "feature": "Datei-Upload",
+   "test": "Die harmlose EICAR-Antiviren-Testdatei hochladen",
+   "expected": "Erkannt und in Quarantäne gestellt"
+  },
+  "FILE-05": {
+   "group": "Eingabeverarbeitung, Dateien und Zahlungen",
+   "feature": "Datei-Upload",
+   "test": "Eine hochgeladene Datei als anderer Benutzer per direkter URL abrufen und prüfen, dass sie nicht ausgeführt wird",
+   "expected": "Autorisierung greift; als Daten ausgeliefert"
+  },
+  "PAY-01": {
+   "group": "Eingabeverarbeitung, Dateien und Zahlungen",
+   "feature": "Zahlungen",
+   "test": "Preis, Menge, Währung oder Rabatt in der Anfrage ändern",
+   "expected": "Der Server berechnet aus vertrauenswürdigen Daten neu; Abweichungen abgelehnt"
+  },
+  "PAY-02": {
+   "group": "Eingabeverarbeitung, Dateien und Zahlungen",
+   "feature": "Zahlungen",
+   "test": "Eine Zahlungsbestätigung wiederholen, einen Schritt überspringen, zweimal gleichzeitig absenden",
+   "expected": "Jede Bestellung wird einmal bezahlt; Schrittfolge erzwungen"
+  },
+  "PAY-03": {
+   "group": "Eingabeverarbeitung, Dateien und Zahlungen",
+   "feature": "Zahlungen",
+   "test": "Menge 0, -1, Maximum und Maximum plus eins sowie Beträge mit vielen Dezimalstellen verwenden",
+   "expected": "Abgelehnt oder gemäß Geschäftsregel behandelt"
+  },
+  "CFG-01": {
+   "group": "Konfiguration, Fehler und Protokollierung",
+   "feature": "Konfiguration",
+   "test": "Standard-, Admin- und Debug-Seiten, Verzeichnislisten und Beispieldateien anfordern",
+   "expected": "Nicht offengelegt"
+  },
+  "CFG-02": {
+   "group": "Konfiguration, Fehler und Protokollierung",
+   "feature": "Konfiguration",
+   "test": "Antwort-Header wichtiger Seiten prüfen",
+   "expected": "HSTS, CSP, X-Content-Type-Options und Referrer-Policy vorhanden; keine Versionsbanner"
+  },
+  "CFG-03": {
+   "group": "Konfiguration, Fehler und Protokollierung",
+   "feature": "Konfiguration",
+   "test": "Die TLS-Konfiguration scannen",
+   "expected": "Nur TLS 1.2 oder neuer; starke Chiffren; gültige Zertifikatskette"
+  },
+  "ERR-01": {
+   "group": "Konfiguration, Fehler und Protokollierung",
+   "feature": "Fehler",
+   "test": "Fehler mit fehlerhaften Anfragen und einem Timeout einer Abhängigkeit erzwingen",
+   "expected": "Allgemeine Meldung plus Anfrage-ID; kein Stacktrace"
+  },
+  "ERR-02": {
+   "group": "Konfiguration, Fehler und Protokollierung",
+   "feature": "Fehler",
+   "test": "Die Autorisierungsprüfung selbst scheitern lassen, etwa indem der Richtliniendienst nicht erreichbar ist",
+   "expected": "Zugriff verweigert: Das System schlägt geschlossen fehl"
+  },
+  "LOG-01": {
+   "group": "Konfiguration, Fehler und Protokollierung",
+   "feature": "Protokollierung und Alarmierung",
+   "test": "Eine fehlgeschlagene Anmeldung, eine Zugriffsverweigerung, eine Rollenänderung und eine Admin-Aktion ausführen",
+   "expected": "Jede wird mit Akteur, Zeit, Quelle und Ergebnis protokolliert; keine Geheimnisse"
+  },
+  "LOG-02": {
+   "group": "Konfiguration, Fehler und Protokollierung",
+   "feature": "Protokollierung und Alarmierung",
+   "test": "Zeilenumbruch- und Steuerzeichen in ein Feld eingeben, das protokolliert wird",
+   "expected": "Im Protokoll neutralisiert"
+  },
+  "LOG-03": {
+   "group": "Konfiguration, Fehler und Protokollierung",
+   "feature": "Protokollierung und Alarmierung",
+   "test": "Eine definierte Alarmbedingung auslösen, etwa zehn fehlgeschlagene Anmeldungen",
+   "expected": "Der Alarm erreicht die Bereitschaftsperson innerhalb der Zielzeit"
+  }
+ }
+}

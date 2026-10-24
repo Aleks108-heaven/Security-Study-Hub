@@ -1,0 +1,280 @@
+{
+ "testcases": {
+  "LOGIN-01": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Logowanie",
+   "test": "Zalogować się prawidłowymi danymi logowania",
+   "expected": "Sukces; wydawany jest nowy identyfikator sesji; żadne sekrety nie są pokazywane"
+  },
+  "LOGIN-02": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Logowanie",
+   "test": "Zalogować się błędnym hasłem, a potem jako nieznany użytkownik",
+   "expected": "Ten sam komunikat i podobny czas odpowiedzi w obu przypadkach; brak wyliczania kont"
+  },
+  "LOGIN-03": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Logowanie",
+   "test": "Nieudanie zalogować się N-1, N i N+1 razy, gdzie N to próg blokady",
+   "expected": "Ograniczanie lub blokada zaczyna się na zdefiniowanym progu; prawdziwy użytkownik może odzyskać dostęp; blokady nie da się łatwo nadużyć do odmowy usługi"
+  },
+  "LOGIN-04": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Logowanie",
+   "test": "Ustawić hasła o długości 7, 8, 14, 15, 64 i 65 znaków, ze spacjami i Unicode",
+   "expected": "Reguły zgodne z polityką (SP 800-63B-4: minimum 15 przy jednym czynniku, 8 z MFA, akceptowane 64 lub więcej); bez reguł składu"
+  },
+  "LOGIN-05": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Logowanie",
+   "test": "Ustawić hasło z publicznej listy wycieków",
+   "expected": "Odrzucone z czytelnym komunikatem"
+  },
+  "LOGIN-06": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Logowanie",
+   "test": "Wysłać dane logowania przez zwykły HTTP, a potem sprawdzić przekierowania i nagłówki",
+   "expected": "Dane logowania nie są akceptowane przez HTTP; wymuszone HTTPS; obecny HSTS"
+  },
+  "LOGIN-07": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Logowanie",
+   "test": "Przy włączonym MFA zażądać strony po zalogowaniu bezpośrednio, bez ukończenia drugiego kroku",
+   "expected": "Dostęp odmówiony, dopóki drugi czynnik nie zostanie wykonany"
+  },
+  "RESET-01": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Resetowanie hasła",
+   "test": "Zażądać resetu dla prawidłowego konta i dla nieznanego",
+   "expected": "Identyczna ogólna odpowiedź; jednorazowy link o ograniczonym czasie ważności"
+  },
+  "RESET-02": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Resetowanie hasła",
+   "test": "Użyć ponownie linku resetującego; użyć wygasłego; użyć wydanego przed zmianą hasła",
+   "expected": "Za każdym razem odrzucone"
+  },
+  "RESET-03": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Resetowanie hasła",
+   "test": "Zmienić token lub identyfikator użytkownika w linku resetującym",
+   "expected": "Odrzucone; brak informacji o koncie"
+  },
+  "RESET-04": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Resetowanie hasła",
+   "test": "Zażądać wielu resetów dla jednego konta, a potem dla wielu kont",
+   "expected": "Ograniczona częstotliwość; starsze tokeny unieważnione; użytkownik powiadomiony"
+  },
+  "SESS-01": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Sesje",
+   "test": "Zalogować się i sprawdzić ciasteczko sesji",
+   "expected": "Ustawione Secure, HttpOnly i SameSite; nieprzewidywalna wartość"
+  },
+  "SESS-02": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Sesje",
+   "test": "Użyć ponownie starego identyfikatora sesji po wylogowaniu i po zmianie hasła",
+   "expected": "Odrzucone: unieważnianie odbywa się na serwerze"
+  },
+  "SESS-03": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Sesje",
+   "test": "Działać minutę przed i minutę po limitach bezczynności i bezwzględnym",
+   "expected": "Sesja kończy się w skonfigurowanych granicach"
+  },
+  "SESS-04": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Sesje",
+   "test": "Ustawić znany identyfikator sesji przed logowaniem, a potem się zalogować",
+   "expected": "Przy logowaniu wydawany jest nowy identyfikator; stary jest nieważny"
+  },
+  "SESS-05": {
+   "group": "Uwierzytelnianie, odzyskiwanie i sesje",
+   "feature": "Sesje",
+   "test": "Wysłać żądanie zmieniające stan z innego źródła bez zabezpieczenia anty-CSRF",
+   "expected": "Żądanie odrzucone"
+  },
+  "AC-01": {
+   "group": "Kontrola dostępu i API",
+   "feature": "Kontrola dostępu",
+   "test": "Jako użytkownik A zażądać rekordu użytkownika B, zmieniając identyfikator",
+   "expected": "403 lub 404; żadne dane nie są zwracane"
+  },
+  "AC-02": {
+   "group": "Kontrola dostępu i API",
+   "feature": "Kontrola dostępu",
+   "test": "Jako użytkownik o niskich uprawnieniach wywołać funkcję administracyjną przez trasę interfejsu i przez API",
+   "expected": "403; akcja niewykonana; próba zapisana w logu"
+  },
+  "AC-03": {
+   "group": "Kontrola dostępu i API",
+   "feature": "Kontrola dostępu",
+   "test": "Bez logowania zażądać bezpośrednio chronionych stron i plików",
+   "expected": "401 lub przekierowanie; brak treści"
+  },
+  "AC-04": {
+   "group": "Kontrola dostępu i API",
+   "feature": "Kontrola dostępu",
+   "test": "Dodać nieoczekiwane pola, takie jak role, isAdmin lub price, do aktualizacji profilu",
+   "expected": "Zignorowane lub odrzucone; zapisane wartości bez zmian"
+  },
+  "AC-05": {
+   "group": "Kontrola dostępu i API",
+   "feature": "Kontrola dostępu",
+   "test": "Sprawdzić eksport, wyszukiwanie, raporty, załączniki, pamięci podręczne i WebSockety pod kątem obiektów innego użytkownika lub najemcy",
+   "expected": "Ta sama autoryzacja co na głównej ścieżce"
+  },
+  "AC-06": {
+   "group": "Kontrola dostępu i API",
+   "feature": "Kontrola dostępu",
+   "test": "Obniżyć rolę użytkownika, a potem powtórzyć żądanie wykonane w starej roli",
+   "expected": "Natychmiast odmówione"
+  },
+  "API-01": {
+   "group": "Kontrola dostępu i API",
+   "feature": "API",
+   "test": "Wysłać o jedno żądanie więcej, niż pozwala limit częstotliwości",
+   "expected": "429 z podpowiedzią ponowienia; limit obowiązuje na użytkownika lub klucz"
+  },
+  "API-02": {
+   "group": "Kontrola dostępu i API",
+   "feature": "API",
+   "test": "Zmodyfikować ładunek podpisanego tokenu i go wysłać",
+   "expected": "401; podpis i oświadczenia zweryfikowane"
+  },
+  "API-03": {
+   "group": "Kontrola dostępu i API",
+   "feature": "API",
+   "test": "Wywołać starszą wersję API lub nieudokumentowany punkt końcowy widoczny w ruchu",
+   "expected": "Wyłączone lub chronione tak jak bieżąca wersja"
+  },
+  "API-04": {
+   "group": "Kontrola dostępu i API",
+   "feature": "API",
+   "test": "Wysłać zły typ zawartości, złe typy JSON, ogromną tablicę i zduplikowane klucze",
+   "expected": "Czysty błąd 4xx; brak śladu stosu; brak awarii"
+  },
+  "INP-01": {
+   "group": "Obsługa danych wejściowych, pliki i płatności",
+   "feature": "Obsługa danych wejściowych",
+   "test": "W każdym polu tekstowym wypróbować puste, 1 znak, maksymalną długość, maksimum plus jeden, bardzo długie, Unicode i mieszane kodowania",
+   "expected": "Walidacja po stronie serwera; czysty błąd; brak cichego obcinania lub uszkodzenia"
+  },
+  "INP-02": {
+   "group": "Obsługa danych wejściowych, pliki i płatności",
+   "feature": "Obsługa danych wejściowych",
+   "test": "Wpisać w każdym polu cudzysłów, nawiasy ostre, znaki szablonów i ścieżek oraz obserwować odpowiedzi i wyrenderowane wyjście",
+   "expected": "Traktowane jako dane; brak błędów interpretera; wyjście zakodowane dla swojego kontekstu"
+  },
+  "INP-03": {
+   "group": "Obsługa danych wejściowych, pliki i płatności",
+   "feature": "Obsługa danych wejściowych",
+   "test": "Zapisać nieszkodliwy ciąg znacznikowy ze znakami znaczników w nazwach i komentarzach, a potem obejrzeć go jako inny użytkownik",
+   "expected": "Wyświetlone jako tekst, nigdy nie wykonane"
+  },
+  "INP-04": {
+   "group": "Obsługa danych wejściowych, pliki i płatności",
+   "feature": "Obsługa danych wejściowych",
+   "test": "W laboratorium podać parametrom typu URL (webhook, import, pobieranie obrazu) adresy lokalne i wewnętrzne",
+   "expected": "Zablokowane przez listę dozwolonych"
+  },
+  "FILE-01": {
+   "group": "Obsługa danych wejściowych, pliki i płatności",
+   "feature": "Przesyłanie plików",
+   "test": "Przesłać prawidłowy plik dokładnie o rozmiarze granicznym",
+   "expected": "Zaakceptowany i bezpiecznie zapisany"
+  },
+  "FILE-02": {
+   "group": "Obsługa danych wejściowych, pliki i płatności",
+   "feature": "Przesyłanie plików",
+   "test": "Przesłać limit plus jeden bajt oraz plik zerobajtowy",
+   "expected": "Odrzucone z czytelnym błędem"
+  },
+  "FILE-03": {
+   "group": "Obsługa danych wejściowych, pliki i płatności",
+   "feature": "Przesyłanie plików",
+   "test": "Przesłać niedozwolony typ, podwójne rozszerzenie i plik, którego zawartość nie odpowiada deklarowanemu typowi",
+   "expected": "Odrzucone na serwerze według zawartości, nie tylko według nazwy"
+  },
+  "FILE-04": {
+   "group": "Obsługa danych wejściowych, pliki i płatności",
+   "feature": "Przesyłanie plików",
+   "test": "Przesłać nieszkodliwy testowy plik antywirusowy EICAR",
+   "expected": "Wykryty i objęty kwarantanną"
+  },
+  "FILE-05": {
+   "group": "Obsługa danych wejściowych, pliki i płatności",
+   "feature": "Przesyłanie plików",
+   "test": "Pobrać przesłany plik bezpośrednim adresem URL jako inny użytkownik i sprawdzić, że nie jest wykonywany",
+   "expected": "Obowiązuje autoryzacja; serwowany jako dane"
+  },
+  "PAY-01": {
+   "group": "Obsługa danych wejściowych, pliki i płatności",
+   "feature": "Płatności",
+   "test": "Zmienić cenę, ilość, walutę lub rabat w żądaniu",
+   "expected": "Serwer przelicza z zaufanych danych; niezgodności odrzucane"
+  },
+  "PAY-02": {
+   "group": "Obsługa danych wejściowych, pliki i płatności",
+   "feature": "Płatności",
+   "test": "Powtórzyć potwierdzenie płatności, pominąć krok, wysłać dwa razy jednocześnie",
+   "expected": "Każde zamówienie opłacone raz; kolejność kroków wymuszona"
+  },
+  "PAY-03": {
+   "group": "Obsługa danych wejściowych, pliki i płatności",
+   "feature": "Płatności",
+   "test": "Użyć ilości 0, -1, maksimum i maksimum plus jeden oraz kwot z wieloma miejscami po przecinku",
+   "expected": "Odrzucone lub obsłużone zgodnie z regułą biznesową"
+  },
+  "CFG-01": {
+   "group": "Konfiguracja, błędy i logowanie",
+   "feature": "Konfiguracja",
+   "test": "Zażądać stron domyślnych, administracyjnych i debugowania, list katalogów oraz plików przykładowych",
+   "expected": "Nieujawnione"
+  },
+  "CFG-02": {
+   "group": "Konfiguracja, błędy i logowanie",
+   "feature": "Konfiguracja",
+   "test": "Sprawdzić nagłówki odpowiedzi na kluczowych stronach",
+   "expected": "Obecne HSTS, CSP, X-Content-Type-Options i Referrer-Policy; brak banerów z wersją"
+  },
+  "CFG-03": {
+   "group": "Konfiguracja, błędy i logowanie",
+   "feature": "Konfiguracja",
+   "test": "Przeskanować konfigurację TLS",
+   "expected": "Tylko TLS 1.2 lub nowszy; silne szyfry; prawidłowy łańcuch certyfikatów"
+  },
+  "ERR-01": {
+   "group": "Konfiguracja, błędy i logowanie",
+   "feature": "Błędy",
+   "test": "Wymusić błędy zniekształconymi żądaniami i przekroczeniem czasu zależności",
+   "expected": "Ogólny komunikat plus identyfikator żądania; brak śladu stosu"
+  },
+  "ERR-02": {
+   "group": "Konfiguracja, błędy i logowanie",
+   "feature": "Błędy",
+   "test": "Sprawić, by sama kontrola autoryzacji zawiodła, na przykład czyniąc usługę polityk niedostępną",
+   "expected": "Dostęp odmówiony: system zawodzi w trybie zamkniętym"
+  },
+  "LOG-01": {
+   "group": "Konfiguracja, błędy i logowanie",
+   "feature": "Logowanie zdarzeń i alerty",
+   "test": "Wykonać nieudane logowanie, odmowę dostępu, zmianę roli i akcję administratora",
+   "expected": "Każde jest zapisane z aktorem, czasem, źródłem i wynikiem; bez sekretów"
+  },
+  "LOG-02": {
+   "group": "Konfiguracja, błędy i logowanie",
+   "feature": "Logowanie zdarzeń i alerty",
+   "test": "Umieścić znaki nowej linii i znaki sterujące w polu, które jest logowane",
+   "expected": "Zneutralizowane w logu"
+  },
+  "LOG-03": {
+   "group": "Konfiguracja, błędy i logowanie",
+   "feature": "Logowanie zdarzeń i alerty",
+   "test": "Wywołać zdefiniowany warunek alertu, taki jak dziesięć nieudanych logowań",
+   "expected": "Alert dociera do osoby dyżurnej w docelowym czasie"
+  }
+ }
+}

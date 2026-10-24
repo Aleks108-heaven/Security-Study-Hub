@@ -1,0 +1,1084 @@
+{
+ "reference": {
+  "securityProperties": {
+   "columns": {
+    "property": "Właściwość",
+    "question": "Na jakie pytanie odpowiada",
+    "typicalFailure": "Typowa awaria",
+    "firstTestIdea": "Pierwszy pomysł na test"
+   },
+   "rows": [
+    {
+     "property": "Poufność",
+     "question": "Kto może to odczytać?",
+     "typicalFailure": "Dane w logach, na stronach błędów lub w otwartym magazynie",
+     "firstTestIdea": "Porównać odpowiedzi API między rolami i poszukać pól, których dana rola nie powinna widzieć"
+    },
+    {
+     "property": "Integralność",
+     "question": "Czy może się zmienić niezauważenie?",
+     "typicalFailure": "Zmanipulowane parametry, niepodpisane aktualizacje",
+     "firstTestIdea": "Zmienić po stronie klienta cenę, identyfikator lub wartość roli i potwierdzić, że serwer to odrzuca"
+    },
+    {
+     "property": "Dostępność",
+     "question": "Czy uprawnieni użytkownicy nadal mogą pracować?",
+     "typicalFailure": "Wyczerpanie zasobów, ransomware, pojedynczy punkt awarii",
+     "firstTestIdea": "W uzgodnionych granicach zwiększyć częstotliwość i rozmiar żądań i obserwować ograniczanie oraz powrót do normy"
+    },
+    {
+     "property": "Autentyczność",
+     "question": "Czy podmiot lub dane są prawdziwe?",
+     "typicalFailure": "Sfałszowane tokeny, podszywający się nadawcy",
+     "firstTestIdea": "Zmodyfikować lub odtworzyć token i oczekiwać odrzucenia"
+    },
+    {
+     "property": "Rozliczalność i niezaprzeczalność",
+     "question": "Czy działanie można przypisać jednemu podmiotowi?",
+     "typicalFailure": "Brakujące lub edytowalne logi",
+     "firstTestIdea": "Wykonać akcję administratora i sprawdzić, czy istnieje odporny na manipulacje zapis z podmiotem i czasem"
+    }
+   ]
+  },
+  "technicalBuildingBlocks": {
+   "columns": {
+    "area": "Obszar",
+    "knowAtLeast": "Znać przynajmniej",
+    "whyItMatters": "Dlaczego ma to znaczenie dla testera"
+   },
+   "rows": [
+    {
+     "area": "Sieci",
+     "knowAtLeast": "TCP/IP, DNS, porty, NAT, proxy, zapory",
+     "whyItMatters": "Pokazuje, gdzie ruch można obserwować lub zmieniać"
+    },
+    {
+     "area": "Web",
+     "knowAtLeast": "Metody i kody stanu HTTP, ciasteczka, nagłówki, polityka tego samego źródła, CORS, CSP",
+     "whyItMatters": "Tu leży większość słabości webowych"
+    },
+    {
+     "area": "Kryptografia",
+     "knowAtLeast": "Haszowanie a szyfrowanie a podpisywanie, symetryczna a asymetryczna, TLS 1.2 i 1.3, certyfikaty, haszowanie haseł (Argon2id, scrypt, bcrypt)",
+     "whyItMatters": "Pozwala ocenić słabą lub źle użytą kryptografię"
+    },
+    {
+     "area": "Tożsamość",
+     "knowAtLeast": "Hasła, MFA, SSO (SAML, OIDC), OAuth 2.0, JWT, sesje",
+     "whyItMatters": "Błędy uwierzytelniania i autoryzacji otwierają listy ryzyk"
+    },
+    {
+     "area": "Systemy operacyjne",
+     "knowAtLeast": "Uprawnienia w Linuksie, podstawy Windows i Active Directory, procesy, kontenery",
+     "whyItMatters": "Wyznacza utwardzanie i testy eskalacji uprawnień"
+    },
+    {
+     "area": "Chmura",
+     "knowAtLeast": "Współdzielona odpowiedzialność, role IAM, magazyn, sekrety",
+     "whyItMatters": "Błędna konfiguracja to typowa awaria w chmurze"
+    },
+    {
+     "area": "Dane",
+     "knowAtLeast": "Klasyfikacja, dane osobowe, retencja, kopie zapasowe",
+     "whyItMatters": "Określa skutki i konsekwencje regulacyjne"
+    }
+   ]
+  },
+  "istqbCertificates": {
+   "columns": {
+    "certificate": "Certyfikat",
+    "syllabus": "Sylabus",
+    "prerequisite": "Warunek wstępny",
+    "exam": "Egzamin",
+    "status": "Status w październiku 2026 r."
+   },
+   "rows": [
+    {
+     "certificate": "CT-STE Security Test Engineer",
+     "url": "https://istqb.org/help/security-test-engineer-ste/",
+     "syllabus": "v1.0.1 z 31 stycznia 2025 r.; 1290 minut nauczania",
+     "prerequisite": "CTFL",
+     "exam": "40 pytań, 43 punkty, 28 do zaliczenia (65%), 75 minut",
+     "status": "Aktualny; skupia się na praktycznym wykonywaniu testów bezpieczeństwa"
+    },
+    {
+     "certificate": "CT-SEC Security Tester",
+     "url": "https://www.istqb.org/certifications/certified-tester-security-tester-ct-sec",
+     "syllabus": "v1.0, 2016 r.; 1110 minut nauczania",
+     "prerequisite": "CTFL plus trzy lata odpowiedniego doświadczenia",
+     "exam": "45 pytań, 80 punktów, 52 do zaliczenia (65%), 120 minut",
+     "status": "Dawny; nadal wymieniany w tabelach egzaminów ISTQB z maja 2026 r."
+    }
+   ]
+  },
+  "istqbCrosswalk": {
+   "columns": {
+    "theme": "Temat",
+    "ctSec": "Rozdział CT-SEC 2016 (minuty)",
+    "ctSte": "Rozdział CT-STE v1.0.1 (minuty)",
+    "hubSection": "Sekcja hubu"
+   },
+   "rows": [
+    {
+     "theme": "Podstawy, ryzyko, audyty",
+     "ctSec": "1 Podstawy testowania bezpieczeństwa (105)",
+     "ctSte": "1 Paradygmaty bezpieczeństwa (135)",
+     "hubSection": "3"
+    },
+    {
+     "theme": "Cele, założenia, strategia",
+     "ctSec": "2 Cele, założenia i strategie testowania bezpieczeństwa (130)",
+     "ctSte": "5 Dostosowanie testowania bezpieczeństwa do kontekstu organizacji (195)",
+     "hubSection": "5, 15"
+    },
+    {
+     "theme": "Proces testowy",
+     "ctSec": "3 Procesy testowania bezpieczeństwa (140)",
+     "ctSte": "3 Proces testowania bezpieczeństwa (120)",
+     "hubSection": "5"
+    },
+    {
+     "theme": "Cykl życia",
+     "ctSec": "4 Testowanie bezpieczeństwa w całym cyklu życia oprogramowania (225)",
+     "ctSte": "6 Dostosowanie testowania bezpieczeństwa do modeli cyklu życia wytwarzania oprogramowania (165)",
+     "hubSection": "6"
+    },
+    {
+     "theme": "Techniki i mechanizmy",
+     "ctSec": "5 Testowanie mechanizmów bezpieczeństwa (240)",
+     "ctSte": "2 Techniki testowania bezpieczeństwa (150)",
+     "hubSection": "5, 9"
+    },
+    {
+     "theme": "Czynnik ludzki",
+     "ctSec": "6 Czynnik ludzki w testowaniu bezpieczeństwa (105)",
+     "ctSte": "Brak osobnego rozdziału",
+     "hubSection": "12"
+    },
+    {
+     "theme": "Ocena i raportowanie",
+     "ctSec": "7 Ocena i raportowanie testów bezpieczeństwa (70)",
+     "ctSte": "8 Raportowanie wyników testów bezpieczeństwa (135)",
+     "hubSection": "13, 18"
+    },
+    {
+     "theme": "Narzędzia",
+     "ctSec": "8 Narzędzia do testowania bezpieczeństwa (55)",
+     "ctSte": "9 Narzędzia do testowania bezpieczeństwa (90)",
+     "hubSection": "16"
+    },
+    {
+     "theme": "Normy",
+     "ctSec": "9 Normy i trendy branżowe (40)",
+     "ctSte": "4 Normy i dobre praktyki testowania bezpieczeństwa (195)",
+     "hubSection": "15"
+    },
+    {
+     "theme": "SZBI",
+     "ctSec": "Polityki w rozdziale 1",
+     "ctSte": "7 Testowanie bezpieczeństwa jako część systemu zarządzania bezpieczeństwem informacji (105)",
+     "hubSection": "15"
+    }
+   ]
+  },
+  "testProcessStages": {
+   "columns": {
+    "stage": "Etap",
+    "purpose": "Cel",
+    "keyOutputs": "Kluczowe wyniki",
+    "commonPitfall": "Częsty błąd"
+   },
+   "rows": [
+    {
+     "stage": "Planowanie",
+     "purpose": "Ustalić zakres, cele, podstawę ryzyka, podejście, środowisko, zatwierdzenia, role i kryteria",
+     "keyOutputs": "Plan testów; podpisane upoważnienie i zasady prowadzenia testu",
+     "commonPitfall": "Domyślne testowanie produkcji lub bez pisemnej zgody"
+    },
+    {
+     "stage": "Projektowanie",
+     "purpose": "Przekształcić ryzyka, polityki, normy i wymagania w warunki testowe i przypadki testowe",
+     "keyOutputs": "Przypadki testowe opisujące bezpieczne oczekiwane zachowanie; scenariusze ataku i nadużycia",
+     "commonPitfall": "Jedna ścieżka szczęśliwa plus jeden standardowy ładunek na pole"
+    },
+    {
+     "stage": "Wykonanie",
+     "purpose": "Uruchamiać testy w zatwierdzonym środowisku i zachowywać dowody",
+     "keyOutputs": "Logi, żądania i odpowiedzi, zrzuty ekranu, szkice defektów",
+     "commonPitfall": "Testy destrukcyjne, niezapisane działania, pozostawione dane testowe"
+    },
+    {
+     "stage": "Ocena",
+     "purpose": "Porównać wyniki z kryteriami wyjścia, ocenić ustalenia i zaraportować",
+     "keyOutputs": "Raport z oceną dotkliwości i krokami odtworzenia",
+     "commonPitfall": "Dotkliwość zawyżona lub zaniżona bez uzasadnienia"
+    },
+    {
+     "stage": "Utrzymanie",
+     "purpose": "Aktualizować testy w miarę zmian zagrożeń, kodu i konfiguracji",
+     "keyOutputs": "Zestaw regresyjny, wyciągnięte wnioski",
+     "commonPitfall": "Nieaktualne testy, które nie pasują już do systemu"
+    }
+   ]
+  },
+  "istqbTechniquesForSecurity": {
+   "columns": {
+    "technique": "Technika ISTQB",
+    "securityUse": "Zastosowanie w bezpieczeństwie",
+    "example": "Przykład"
+   },
+   "rows": [
+    {
+     "technique": "Podział na klasy równoważności",
+     "securityUse": "Podzielić dane wejściowe na klasy poprawne, zniekształcone i wrogie",
+     "example": "Wartości zbyt duże, złego typu, zakodowane, puste i ze znakami specjalnymi dla jednego pola"
+    },
+    {
+     "technique": "Analiza wartości brzegowych",
+     "securityUse": "Badać granice długości, rozmiaru, częstotliwości i czasu",
+     "example": "Limit rozmiaru przesyłanego pliku i bajt ponad; blokada po N i N+1 nieudanych logowaniach; wygaśnięcie tokenu plus minus sekunda"
+    },
+    {
+     "technique": "Tablice decyzyjne",
+     "securityUse": "Pokryć kombinacje roli, akcji i stanu zasobu",
+     "example": "Każda komórka rola × akcja × obiekt macierzy kontroli dostępu"
+    },
+    {
+     "technique": "Testowanie przejść między stanami",
+     "securityUse": "Atakować kroki w złej kolejności lub odtworzone",
+     "example": "Użyć linku resetującego po zmianie hasła; pominąć krok realizacji zamówienia; ponownie użyć starej sesji"
+    },
+    {
+     "technique": "Przypadki użycia i nadużycia",
+     "securityUse": "Każdemu przypadkowi użycia przeciwstawić przypadek nadużycia",
+     "example": "„Jako atakujący używam ponownie linku jednorazowego”"
+    },
+    {
+     "technique": "Zgadywanie błędów i listy kontrolne",
+     "securityUse": "Stosować znane listy słabości",
+     "example": "Pozycje OWASP Top 10 i CWE Top 25 dla każdej funkcji"
+    },
+    {
+     "technique": "Testowanie eksploracyjne",
+     "securityUse": "Misje ograniczone czasowo na powierzchni ataku",
+     "example": "„Zbadać edytor profilu pod kątem ujawnienia danych, 60 minut”"
+    },
+    {
+     "technique": "Testowanie kombinatoryczne",
+     "securityUse": "Pokryć mieszanki konfiguracji",
+     "example": "Wersja TLS × szyfr × klient"
+    },
+    {
+     "technique": "Drzewa ataku i modelowanie zagrożeń",
+     "securityUse": "Rozłożyć cel atakującego na części",
+     "example": "Korzeń „przejąć konto”; liście: credential stuffing, błąd w procesie resetowania, kradzież sesji"
+    },
+    {
+     "technique": "Fuzzing (specyficzny dla bezpieczeństwa)",
+     "securityUse": "Podawać zniekształcone lub częściowo poprawne dane na dużą skalę",
+     "example": "Fuzzing plików, protokołów lub API fuzzerem sterowanym pokryciem"
+    },
+    {
+     "technique": "Analiza statyczna i przeglądy",
+     "securityUse": "Badać kod, konfigurację i projekt bez uruchamiania",
+     "example": "SAST, skanowanie sekretów, skanowanie IaC, przegląd projektu"
+    }
+   ]
+  },
+  "sdlcActivities": {
+   "columns": {
+    "stage": "Etap",
+    "activity": "Działanie dotyczące bezpieczeństwa",
+    "verifiedBy": "Jak jest weryfikowane",
+    "tools": "Typowe narzędzia"
+   },
+   "rows": [
+    {
+     "stage": "Wymagania",
+     "activity": "Wymagania bezpieczeństwa, przypadki nadużyć, klasyfikacja danych, mapowanie regulacyjne",
+     "verifiedBy": "Przejrzeć wymagania pod kątem testowalności i przypadków negatywnych; użyć ASVS jako źródła wymagań",
+     "tools": "OWASP ASVS, listy kontrolne przeglądu"
+    },
+    {
+     "stage": "Projekt",
+     "activity": "Modelowanie zagrożeń (STRIDE, PASTA, LINDDUN dla prywatności) i przegląd bezpiecznego projektu",
+     "verifiedBy": "Sprawdzić, czy każde zagrożenie ma zabezpieczenie, a każde zabezpieczenie ma test",
+     "tools": "OWASP Threat Dragon, pytm"
+    },
+    {
+     "stage": "Implementacja",
+     "activity": "Standardy bezpiecznego kodowania, przegląd koleżeński, testy jednostkowe bezpieczeństwa",
+     "verifiedBy": "Analiza statyczna, skanowanie sekretów, testy sprawdzające ścieżki odmowy",
+     "tools": "Semgrep, CodeQL, SonarQube, Gitleaks"
+    },
+    {
+     "stage": "Budowanie i CI",
+     "activity": "Kontrole zależności, licencji, IaC i kontenerów; SBOM; podpisane artefakty",
+     "verifiedBy": "Skanery w potoku z uzgodnionymi progami",
+     "tools": "OWASP Dependency-Check, Trivy, Syft, Grype, Checkov, Sigstore cosign"
+    },
+    {
+     "stage": "Testy i środowisko pośrednie",
+     "activity": "Testowanie dynamiczne i interaktywne, testy API, fuzzing, ręczny test penetracyjny",
+     "verifiedBy": "Skany uwierzytelnione, testy rola po obiekcie, celowane testy ręczne",
+     "tools": "OWASP ZAP, Burp Suite, Nuclei, AFL++"
+    },
+    {
+     "stage": "Wydanie i wdrożenie",
+     "activity": "Kontrole konfiguracji, polityka jako kod, sekrety z sejfu, zatwierdzenia",
+     "verifiedBy": "Kontrole dopuszczenia i polityk, test wycofania",
+     "tools": "Open Policy Agent, Kyverno"
+    },
+    {
+     "stage": "Eksploatacja i utrzymanie",
+     "activity": "Monitorowanie, zarządzanie podatnościami, łatanie, reagowanie na incydenty, kanał ujawniania",
+     "verifiedBy": "Testy alertów, ponowne testy po poprawkach, zestaw regresyjny, bug bounty",
+     "tools": "SIEM, EDR, CISA KEV i EPSS do ustalania priorytetów"
+    }
+   ]
+  },
+  "automatedTestTypes": {
+   "columns": {
+    "type": "Rodzaj",
+    "looksAt": "Analizuje",
+    "findsWell": "Dobrze znajduje",
+    "misses": "Pomija lub ma z tym trudności"
+   },
+   "rows": [
+    {
+     "type": "SAST (statyczny)",
+     "looksAt": "Kod źródłowy, bajtkod",
+     "findsWell": "Wzorce wstrzyknięć, zaszyte sekrety, niebezpieczne API; wczesna informacja zwrotna",
+     "misses": "Błędy logiki biznesowej i konfigurację w czasie działania; wiele fałszywych alarmów"
+    },
+    {
+     "type": "SCA",
+     "looksAt": "Komponenty zewnętrzne",
+     "findsWell": "Wersje ze znanymi podatnościami, problemy z licencjami",
+     "misses": "Nieznane wady; to, czy podatny kod jest osiągalny"
+    },
+    {
+     "type": "DAST (dynamiczny, czarnej skrzynki)",
+     "looksAt": "Działająca aplikacja z zewnątrz",
+     "findsWell": "Błędną konfigurację, brakujące nagłówki, odbite wstrzyknięcia, odsłonięte punkty końcowe",
+     "misses": "Głębokie uwierzytelnione przepływy; błędy autoryzacji i logiki bez starannej konfiguracji"
+    },
+    {
+     "type": "IAST (interaktywny)",
+     "looksAt": "Działająca aplikacja z agentem",
+     "findsWell": "Precyzyjne ustalenia z lokalizacją w kodzie podczas testów funkcjonalnych",
+     "misses": "Wymaga instrumentacji; obsługa języków i frameworków bywa różna"
+    },
+    {
+     "type": "Skanowanie sekretów i IaC",
+     "looksAt": "Repozytoria, historia, szablony",
+     "findsWell": "Klucze w kodzie, otwarty magazyn, zbyt szerokie role",
+     "misses": "Sekrety poza repozytoriami; dryf w czasie działania"
+    },
+    {
+     "type": "Fuzzing",
+     "looksAt": "Parsery, protokoły, API",
+     "findsWell": "Awarie, błędy pamięci, nieobsłużone dane wejściowe",
+     "misses": "Błędy autoryzacji i problemy logiczne"
+    },
+    {
+     "type": "Ręczny test penetracyjny",
+     "looksAt": "Cały system, jak atakujący",
+     "findsWell": "Łańcuchy problemów, błędy logiki, rzeczywisty wpływ",
+     "misses": "Niepowtarzalny przy każdym commicie; zależy od umiejętności testera"
+    }
+   ]
+  },
+  "owaspTop10_2025": {
+   "columns": {
+    "id": "ID",
+    "category": "Kategoria",
+    "whatGoesWrong": "Co idzie nie tak",
+    "testIdeas": "Pomysły na testy",
+    "prevention": "Zapobieganie",
+    "exampleCwes": "Przykładowe CWE"
+   },
+   "rows": [
+    {
+     "id": "A01",
+     "category": "Złamana kontrola dostępu (Broken Access Control)",
+     "whatGoesWrong": "Użytkownicy działają poza swoimi uprawnieniami; SSRF należy teraz do tej kategorii",
+     "testIdeas": "Zamienić identyfikatory obiektów między dwoma kontami; wywołać funkcje administracyjne jako niska rola; wymusić przeglądanie ukrytych adresów URL; skierować funkcje pobierania po stronie serwera na adresy wewnętrzne",
+     "prevention": "Domyślnie odmawiać; egzekwować dla obiektu i funkcji na serwerze; centralne kontrole dostępu; lista dozwolonych miejsc docelowych ruchu wychodzącego",
+     "exampleCwes": "862, 863, 639, 22, 918"
+    },
+    {
+     "id": "A02",
+     "category": "Błędna konfiguracja zabezpieczeń (Security Misconfiguration)",
+     "whatGoesWrong": "Ustawienia domyślne, otwarte funkcje, rozwlekłe błędy, zbyt szerokie uprawnienia w chmurze",
+     "testIdeas": "Sprawdzić domyślne konta i konsole, listowanie katalogów, punkty końcowe debugowania, nagłówki bezpieczeństwa, uprawnienia magazynu, ustawienia TLS",
+     "prevention": "Utwardzone linie bazowe; minimalne funkcje; automatyczne kontrole konfiguracji",
+     "exampleCwes": "16"
+    },
+    {
+     "id": "A03",
+     "category": "Awarie łańcucha dostaw oprogramowania (Software Supply Chain Failures)",
+     "whatGoesWrong": "Skompromitowane lub podatne zależności, systemy budowania i ścieżki dystrybucji",
+     "testIdeas": "Zinwentaryzować zależności i kroki budowania; sprawdzić przypinanie, podpisy i pochodzenie; poszukać narażenia na dependency confusion",
+     "prevention": "SBOM; przypięte i zweryfikowane zależności; utwardzone CI/CD; podpisane artefakty; polityka aktualizacji",
+     "exampleCwes": "1104, 1395"
+    },
+    {
+     "id": "A04",
+     "category": "Awarie kryptograficzne (Cryptographic Failures)",
+     "whatGoesWrong": "Brak lub słaba ochrona danych w tranzycie i w spoczynku",
+     "testIdeas": "Zbadać protokoły i szyfry; poszukać danych jawnym tekstem, słabego haszowania haseł, zaszytych kluczy, przewidywalnych tokenów",
+     "prevention": "TLS wszędzie; silne nowoczesne algorytmy; zarządzanie kluczami; Argon2id dla haseł",
+     "exampleCwes": "327, 319, 259, 330"
+    },
+    {
+     "id": "A05",
+     "category": "Wstrzyknięcie (Injection)",
+     "whatGoesWrong": "Niezaufane dane są interpretowane jako kod lub polecenia (SQL, system operacyjny, szablony, skrypty na stronach)",
+     "testIdeas": "Podzielić dane wejściowe na klasy i wypróbować wartości brzegowe i ze znakami specjalnymi; obserwować błędy, zmiany zachowania i niezmienione wyjście; przejrzeć, jak budowane są zapytania i wyjście",
+     "prevention": "Zapytania parametryzowane; kodowanie wyjścia zależne od kontekstu; walidacja jako obrona w głębi; konta bazy danych o minimalnych uprawnieniach",
+     "exampleCwes": "79, 89, 78, 94"
+    },
+    {
+     "id": "A06",
+     "category": "Niebezpieczny projekt (Insecure Design)",
+     "whatGoesWrong": "Brakujące lub nieskuteczne zabezpieczenia na poziomie projektu; logika biznesowa podatna na nadużycia",
+     "testIdeas": "Przejrzeć model zagrożeń; testować nadużycia przepływów, takie jak pominięte kroki, odtwarzanie, manipulacja ilością i ceną, wyścigi",
+     "prevention": "Modelowanie zagrożeń; bezpieczne wzorce projektowe; wymagania z przypadków nadużyć; limity w wrażliwych przepływach",
+     "exampleCwes": "501, 522"
+    },
+    {
+     "id": "A07",
+     "category": "Awarie uwierzytelniania (Authentication Failures)",
+     "whatGoesWrong": "Słabe logowanie, odzyskiwanie lub obsługa sesji",
+     "testIdeas": "Testować blokadę i limity częstotliwości, politykę haseł, egzekwowanie MFA, tokeny resetujące, fiksację sesji i wylogowanie",
+     "prevention": "MFA; sprawdzanie haseł z wycieków; bezpieczne zarządzanie sesjami; jednolite komunikaty o błędach",
+     "exampleCwes": "287, 306, 384"
+    },
+    {
+     "id": "A08",
+     "category": "Awarie integralności oprogramowania lub danych (Software or Data Integrity Failures)",
+     "whatGoesWrong": "Kod lub dane zaufane bez kontroli integralności; niebezpieczna deserializacja",
+     "testIdeas": "Przejrzeć mechanizmy aktualizacji i wtyczek; sprawdzić weryfikację podpisów; przetestować punkty deserializacji i niepodpisane dane klienta",
+     "prevention": "Podpisany kod i dane; kontrole integralności aktualizacji i potoków; unikać deserializacji niezaufanych danych",
+     "exampleCwes": "502, 829, 494"
+    },
+    {
+     "id": "A09",
+     "category": "Awarie logowania i alertów bezpieczeństwa (Security Logging and Alerting Failures)",
+     "whatGoesWrong": "Ataki nie zostawiają użytecznego śladu i nie wywołują alertu",
+     "testIdeas": "Wywołać nieudane logowania, naruszenia dostępu i akcje administratora; zweryfikować, że są logowane, korelowane i alertowane; sprawdzić logi pod kątem sekretów",
+     "prevention": "Logować zdarzenia bezpieczeństwa z kontekstem; chronić integralność logów; alertować przy zdefiniowanych warunkach; testować alerty",
+     "exampleCwes": "778, 117, 532"
+    },
+    {
+     "id": "A10",
+     "category": "Niewłaściwa obsługa sytuacji wyjątkowych (Mishandling of Exceptional Conditions)",
+     "whatGoesWrong": "Zła obsługa błędów, błędy logiczne, awaria w trybie otwartym",
+     "testIdeas": "Wymusić przekroczenia czasu, zniekształcone dane wejściowe i awarie zależności; potwierdzić, że system zawodzi w trybie zamkniętym bez ujawniania szczegółów",
+     "prevention": "Centralna obsługa błędów; zawodzić w trybie zamkniętym; limity zasobów; testy ścieżek awarii",
+     "exampleCwes": "209, 636, 755, 476"
+    }
+   ]
+  },
+  "wstgCategories": {
+   "columns": {
+    "category": "Kategoria WSTG",
+    "id": "ID",
+    "focus": "Zakres",
+    "top10": "Najbliższe pozycje Top 10"
+   },
+   "rows": [
+    {
+     "category": "4.1 Zbieranie informacji",
+     "id": "INFO",
+     "focus": "Rozpoznawanie odcisku, odsłonięte pliki, punkty wejścia",
+     "top10": "A02"
+    },
+    {
+     "category": "4.2 Testowanie zarządzania konfiguracją i wdrożeniem",
+     "id": "CONF",
+     "focus": "Platforma, interfejsy administracyjne, metody HTTP, rozszerzenia plików",
+     "top10": "A02, A03"
+    },
+    {
+     "category": "4.3 Testowanie zarządzania tożsamością",
+     "id": "IDNT",
+     "focus": "Role, rejestracja, wyliczanie kont",
+     "top10": "A01, A07"
+    },
+    {
+     "category": "4.4 Testowanie uwierzytelniania",
+     "id": "ATHN",
+     "focus": "Dane logowania, blokada, reset, MFA, obejście",
+     "top10": "A07"
+    },
+    {
+     "category": "4.5 Testowanie autoryzacji",
+     "id": "ATHZ",
+     "focus": "Path traversal, eskalacja uprawnień, niebezpieczne bezpośrednie odwołania do obiektów",
+     "top10": "A01"
+    },
+    {
+     "category": "4.6 Testowanie zarządzania sesją",
+     "id": "SESS",
+     "focus": "Ciasteczka, fiksacja, CSRF, wylogowanie, limity czasu",
+     "top10": "A07"
+    },
+    {
+     "category": "4.7 Testowanie walidacji danych wejściowych",
+     "id": "INPV",
+     "focus": "Rodziny wstrzyknięć, XSS, SSRF",
+     "top10": "A05, A01"
+    },
+    {
+     "category": "4.8 Testowanie obsługi błędów",
+     "id": "ERRH",
+     "focus": "Komunikaty o błędach i ślady stosu",
+     "top10": "A10"
+    },
+    {
+     "category": "4.9 Testowanie słabej kryptografii",
+     "id": "CRYP",
+     "focus": "TLS, dopełnianie, nieszyfrowane kanały",
+     "top10": "A04"
+    },
+    {
+     "category": "4.10 Testowanie logiki biznesowej",
+     "id": "BUSL",
+     "focus": "Nadużycia przepływów, limity, przesyłanie plików",
+     "top10": "A06"
+    },
+    {
+     "category": "4.11 Testowanie po stronie klienta",
+     "id": "CLNT",
+     "focus": "Problemy DOM, CORS, clickjacking, komunikaty webowe",
+     "top10": "A05, A02"
+    },
+    {
+     "category": "4.12 Testowanie API",
+     "id": "APIT",
+     "focus": "GraphQL i kontrole specyficzne dla API",
+     "top10": "Zob. sekcja 8"
+    }
+   ]
+  },
+  "owaspApiTop10_2023": {
+   "columns": {
+    "id": "ID",
+    "name": "Nazwa",
+    "whatGoesWrong": "Co idzie nie tak",
+    "testIdeas": "Pomysły na testy",
+    "prevention": "Zapobieganie"
+   },
+   "rows": [
+    {
+     "id": "API1",
+     "name": "Złamana autoryzacja na poziomie obiektu (Broken Object Level Authorization)",
+     "whatGoesWrong": "Użytkownik dociera do obiektów innych użytkowników, zmieniając identyfikator",
+     "testIdeas": "Mając dwa konta, zażądać każdego typu obiektu, w tym punktów końcowych list, wyszukiwania, eksportu i wsadowych, z identyfikatorami drugiego konta; trudne do odgadnięcia identyfikatory nie są zabezpieczeniem",
+     "prevention": "Sprawdzać właściciela lub najemcę w każdym handlerze i w warstwie danych"
+    },
+    {
+     "id": "API2",
+     "name": "Złamane uwierzytelnianie (Broken Authentication)",
+     "whatGoesWrong": "Słaba obsługa tokenów, brak limitów logowania lub resetu, luźna walidacja tokenów",
+     "testIdeas": "Sprawdzić wygaśnięcie tokenu, ponowne użycie po wylogowaniu, walidację podpisu i oświadczeń, tokeny procesu resetowania oraz ograniczanie zgadywania danych logowania",
+     "prevention": "Standardowe biblioteki uwierzytelniania; krótkotrwałe tokeny; limity częstotliwości; ścisła walidacja podpisu, wystawcy, odbiorcy i wygaśnięcia"
+    },
+    {
+     "id": "API3",
+     "name": "Złamana autoryzacja na poziomie właściwości obiektu (Broken Object Property Level Authorization)",
+     "whatGoesWrong": "Odpowiedzi ujawniają zbyt wiele pól albo zapisy przyjmują pola, których użytkownik nie może ustawiać",
+     "testIdeas": "Porównać pola odpowiedzi między rolami; dodać nieoczekiwane właściwości, takie jak role lub price, do żądań zapisu i sprawdzić, że są ignorowane lub odrzucane",
+     "prevention": "Jawne modele odpowiedzi; lista dozwolonych pól zapisywalnych"
+    },
+    {
+     "id": "API4",
+     "name": "Nieograniczone zużycie zasobów (Unrestricted Resource Consumption)",
+     "whatGoesWrong": "Brak limitów częstotliwości, rozmiaru, stronicowania lub kosztu",
+     "testIdeas": "W uzgodnionych granicach przetestować duże rozmiary stron, głębokie zagnieżdżenie, duże ładunki, rozmiary wsadów i powtarzane kosztowne operacje",
+     "prevention": "Limity, ograniczenia częstotliwości, limity ładunku i czasu, limity wydatków dla płatnych wywołań zaplecza"
+    },
+    {
+     "id": "API5",
+     "name": "Złamana autoryzacja na poziomie funkcji (Broken Function Level Authorization)",
+     "whatGoesWrong": "Zwykli użytkownicy docierają do funkcji administracyjnych, zmieniając metodę lub ścieżkę",
+     "testIdeas": "Wywołać punkty końcowe administracyjne i metody zapisu jako niska rola; wypróbować metody, których dokumentacja nie wymienia",
+     "prevention": "Domyślnie odmawiać; kontrole ról dla każdej funkcji; oddzielne trasy administracyjne"
+    },
+    {
+     "id": "API6",
+     "name": "Nieograniczony dostęp do wrażliwych przepływów biznesowych (Unrestricted Access to Sensitive Business Flows)",
+     "whatGoesWrong": "Automatyzacja nadużywa legalnego przepływu na dużą skalę, np. kuponów, rezerwacji lub rejestracji",
+     "testIdeas": "Oskryptować powtarzane uruchomienia przepływu; sprawdzić limity na użytkownika i urządzenie oraz dodatkowe kontrole",
+     "prevention": "Zidentyfikować wrażliwe przepływy; ograniczać je i monitorować; dodać tarcie tam, gdzie nadużycie się opłaca"
+    },
+    {
+     "id": "API7",
+     "name": "Fałszowanie żądań po stronie serwera (Server Side Request Forgery)",
+     "whatGoesWrong": "API pobiera adres URL kontrolowany przez wywołującego",
+     "testIdeas": "W laboratorium podać parametrom webhooka, importu i pobierania obrazów cele wewnętrzne i pętli zwrotnej i sprawdzić, czy są pobierane",
+     "prevention": "Lista dozwolonych miejsc docelowych; blokować zakresy wewnętrzne; wyłączyć przekierowania; ograniczyć ruch wychodzący"
+    },
+    {
+     "id": "API8",
+     "name": "Błędna konfiguracja zabezpieczeń (Security Misconfiguration)",
+     "whatGoesWrong": "Zbyt liberalny CORS, rozwlekłe błędy, brak TLS, zbędne metody, ustawienia domyślne",
+     "testIdeas": "Przejrzeć reguły CORS, nagłówki, treści błędów, tryby debugowania i włączone metody",
+     "prevention": "Powtarzalna utwardzona konfiguracja; automatyczne kontrole w CI"
+    },
+    {
+     "id": "API9",
+     "name": "Niewłaściwe zarządzanie inwentarzem (Improper Inventory Management)",
+     "whatGoesWrong": "Stare, cieniowe lub nieudokumentowane wersje i środowiska pozostają dostępne",
+     "testIdeas": "Poszukać starszych wersji i hostów nieprodukcyjnych; porównać rzeczywisty ruch z dokumentem OpenAPI",
+     "prevention": "Prowadzić inwentarz; wycofywać stare wersje; dokumentować każdy punkt końcowy"
+    },
+    {
+     "id": "API10",
+     "name": "Niebezpieczne korzystanie z API (Unsafe Consumption of APIs)",
+     "whatGoesWrong": "API ufa danym z usług zewnętrznych",
+     "testIdeas": "Zasymulować usługę nadrzędną, by zwracała dane zniekształcone, zbyt duże lub wrogie, i obserwować skutek",
+     "prevention": "Traktować dane z usług nadrzędnych jako niezaufane; walidować, ustawiać limity czasu, weryfikować TLS"
+    }
+   ]
+  },
+  "securityMechanisms": {
+   "columns": {
+    "mechanism": "Mechanizm",
+    "effectiveMeans": "Skuteczne środki",
+    "howToTest": "Jak go testować",
+    "tools": "Narzędzia",
+    "typicalFindings": "Typowe ustalenia"
+   },
+   "rows": [
+    {
+     "mechanism": "Utwardzanie systemu",
+     "effectiveMeans": "Tylko potrzebne usługi, bezpieczne ustawienia domyślne, załatane, minimalne uprawnienia",
+     "howToTest": "Porównać konfigurację z linią bazową (CIS Benchmark lub przewodnik producenta); przeskanować porty i usługi; sprawdzić domyślne konta, uprawnienia plików i poziom poprawek",
+     "tools": "Nmap, OpenSCAP, Lynis, CIS-CAT, Greenbone",
+     "typicalFindings": "Domyślne dane logowania, otwarte porty zarządzania, pliki zapisywalne przez wszystkich, brakujące poprawki"
+    },
+    {
+     "mechanism": "Uwierzytelnianie i autoryzacja",
+     "effectiveMeans": "Tylko właściwa tożsamość dostaje tylko właściwy dostęp, za każdym razem",
+     "howToTest": "Macierz rola × funkcja × obiekt; testy logowania, MFA, resetu, sesji i wylogowania; zmanipulowane tokeny; wymuszone przeglądanie",
+     "tools": "Burp Suite, ZAP, Autorize, skrypty",
+     "typicalFindings": "Brak kontroli po stronie serwera, słabe procesy odzyskiwania, sesje, które przeżywają wylogowanie"
+    },
+    {
+     "mechanism": "Szyfrowanie",
+     "effectiveMeans": "Właściwe algorytmy, protokoły i klucze chronią dane w tranzycie i w spoczynku",
+     "howToTest": "Przeskanować konfigurację TLS; sprawdzić łańcuch i ważność certyfikatu; poszukać kanałów jawnym tekstem i niechronionych danych w spoczynku; przejrzeć przechowywanie i rotację kluczy",
+     "tools": "testssl.sh, SSLyze, openssl, Wireshark",
+     "typicalFindings": "Stare wersje protokołów, słabe szyfry, zaszyte klucze, brak HSTS"
+    },
+    {
+     "mechanism": "Zapory i strefy sieciowe",
+     "effectiveMeans": "Tylko dozwolone przepływy przekraczają granicę strefy; domyślna odmowa",
+     "howToTest": "Porównać reguły z macierzą przepływów; testować z każdej strefy do następnej, ruch wychodzący i przychodzący",
+     "tools": "Nmap, analizatory reguł",
+     "typicalFindings": "Reguły any-any, nieaktualne reguły, płaskie sieci, otwarty ruch wychodzący"
+    },
+    {
+     "mechanism": "Wykrywanie i zapobieganie włamaniom",
+     "effectiveMeans": "Znane wzorce ataków wywołują alerty, które ktoś widzi",
+     "howToTest": "Uruchomić uzgodnione, nieszkodliwe symulacje ataków i sprawdzić wykrywanie, kierowanie alertów i reakcję; przejrzeć obsługę fałszywych alarmów",
+     "tools": "Suricata, Snort, Zeek, Atomic Red Team w laboratorium, SIEM",
+     "typicalFindings": "Wyłączone reguły, alerty, których nikt nie czyta, martwe punkty w ruchu szyfrowanym"
+    },
+    {
+     "mechanism": "Skanowanie złośliwego oprogramowania",
+     "effectiveMeans": "Złośliwe pliki są zatrzymywane w istotnych punktach wejścia",
+     "howToTest": "Użyć nieszkodliwego pliku testowego EICAR przy przesyłaniu, poczcie i na stacji końcowej; sprawdzić aktualizacje sygnatur, obsługę archiwów i limity rozmiaru",
+     "tools": "Plik testowy EICAR, ClamAV, produkty dla stacji końcowych",
+     "typicalFindings": "Obejście przez archiwa lub pliki chronione hasłem, nieaktualne sygnatury"
+    },
+    {
+     "mechanism": "Zaciemnianie danych (maskowanie, tokenizacja, anonimizacja)",
+     "effectiveMeans": "Prawdziwych wrażliwych wartości nie mogą odzyskać ci, którzy nie powinni ich widzieć",
+     "howToTest": "Zbadać dane i logi nieprodukcyjne; spróbować reidentyfikacji przez łączenie pól; sprawdzić odwracalność i obsługę kluczy",
+     "tools": "Zapytania SQL, skrypty profilujące",
+     "typicalFindings": "Dane produkcyjne w systemach testowych, odwracalne maskowanie, pozostawione quasi-identyfikatory"
+    },
+    {
+     "mechanism": "Szkolenia z bezpieczeństwa",
+     "effectiveMeans": "Ludzie po nich zachowują się inaczej",
+     "howToTest": "Mierzyć zachowanie: odsetek kliknięć i zgłoszeń w symulacjach phishingu, wyjątki od polityki, zgłoszenia incydentów przed i po",
+     "tools": "Platformy symulacji, za zgodą i zatwierdzeniem",
+     "typicalFindings": "Jednorazowe kursy i brak pomiarów"
+    }
+   ]
+  },
+  "infrastructureDomains": {
+   "columns": {
+    "domain": "Obszar",
+    "reference": "Odniesienie",
+    "testFirst": "Co testować najpierw",
+    "tools": "Typowe narzędzia"
+   },
+   "rows": [
+    {
+     "domain": "Aplikacje mobilne",
+     "reference": "OWASP MASVS (osiem grup kontroli) i przewodnik testowania MASTG",
+     "url": "https://mas.owasp.org/MASVS/",
+     "testFirst": "Lokalne przechowywanie, ruch sieciowy, uwierzytelnianie, interakcja z platformą, ochrona binarna, prywatność",
+     "tools": "MobSF, jadx, apktool, Frida, objection, Burp Suite"
+    },
+    {
+     "domain": "Konta w chmurze",
+     "reference": "Wzorce dostawców (CIS Foundations), Cloud Controls Matrix organizacji Cloud Security Alliance",
+     "testFirst": "Uprawnienia IAM, publiczny magazyn, reguły sieciowe, sekrety, logowanie, ekspozycja usługi metadanych",
+     "tools": "Prowler, ScoutSuite, Steampipe"
+    },
+    {
+     "domain": "Kontenery i Kubernetes",
+     "reference": "NIST SP 800-190, CIS Kubernetes Benchmark, Pod Security Standards",
+     "testFirst": "Zawartość obrazów, kontenery root i uprzywilejowane, polityki sieciowe, RBAC, sekrety, kontrola dopuszczenia",
+     "tools": "Trivy, Grype, kube-bench, Kubescape, Falco"
+    },
+    {
+     "domain": "Infrastruktura jako kod",
+     "reference": "Wytyczne dostawców i CIS",
+     "testFirst": "Otwarty magazyn, zbyt szerokie role, niezaszyfrowane zasoby, zaszyte sekrety, przed wdrożeniem",
+     "tools": "Checkov, KICS, skanowanie konfiguracji Trivy"
+    },
+    {
+     "domain": "Sieci i sieci bezprzewodowe",
+     "reference": "NIST SP 800-115, przewodniki utwardzania producentów",
+     "testFirst": "Otwarte porty i usługi, domyślne dane logowania, słaba segmentacja, szyfrowanie Wi-Fi i fałszywe punkty dostępu",
+     "tools": "Nmap, Wireshark, pakiet Aircrack-ng w laboratorium"
+    },
+    {
+     "domain": "IoT i technologia operacyjna (OT)",
+     "reference": "IEC 62443, MITRE ATT&CK for ICS",
+     "testFirst": "Domyślne dane logowania, ścieżki aktualizacji, ekspozycja protokołów, segmentacja od IT",
+     "tools": "Narzędzia monitorowania pasywnego; unikać aktywnych skanów na działającym zakładzie"
+    }
+   ]
+  },
+  "owaspLlmTop10_2025": {
+   "columns": {
+    "id": "ID",
+    "risk": "Ryzyko",
+    "testIdea": "Pomysł na test",
+    "control": "Zabezpieczenie"
+   },
+   "rows": [
+    {
+     "id": "LLM01",
+     "risk": "Wstrzyknięcie promptu (Prompt Injection)",
+     "testIdea": "Ukryć instrukcje w dokumentach, stronach, e-mailach i wynikach narzędzi, które system pobiera, i sprawdzić, czy wykonuje je wbrew polityce; powtarzać w różnych językach i czatach wieloturowych",
+     "control": "Rozdzielać uprawnienia; traktować wyjście modelu jako niezaufane; wymagać zatwierdzenia przez człowieka dla działań o dużym wpływie"
+    },
+    {
+     "id": "LLM02",
+     "risk": "Ujawnienie wrażliwych informacji (Sensitive Information Disclosure)",
+     "testIdea": "Sondować dane innych użytkowników lub najemców, sekrety w kontekście i zapamiętane dane; sprawdzić uprawnienia wyszukiwania",
+     "control": "Minimalizacja danych; autoryzacja wyszukiwania per użytkownik; filtrowanie wyjścia"
+    },
+    {
+     "id": "LLM03",
+     "risk": "Łańcuch dostaw (Supply Chain)",
+     "testIdea": "Zinwentaryzować modele, zbiory danych, wtyczki i biblioteki; zweryfikować pochodzenie i formaty plików",
+     "control": "Sprawdzone źródła; podpisane modele; lista materiałowa AI"
+    },
+    {
+     "id": "LLM04",
+     "risk": "Zatruwanie danych i modeli (Data and Model Poisoning)",
+     "testIdea": "Przejrzeć, jak zbierane i zatwierdzane są dane treningowe, dostrajające i osadzeń; uruchomić oceny wyzwalaczy i dryfu",
+     "control": "Walidacja i wersjonowanie danych; kontrola dostępu; oceny red team"
+    },
+    {
+     "id": "LLM05",
+     "risk": "Niewłaściwa obsługa wyjścia (Improper Output Handling)",
+     "testIdea": "Sprawić, by model generował znaczniki lub ciągi podobne do poleceń, i sprawdzić, czy kod w dalszej części je interpretuje",
+     "control": "Kodować i walidować wyjście jak każde niezaufane dane wejściowe"
+    },
+    {
+     "id": "LLM06",
+     "risk": "Nadmierna sprawczość (Excessive Agency)",
+     "testIdea": "Wypisać narzędzia i uprawnienia; spróbować sprawić, by agent działał poza własnymi uprawnieniami wywołującego",
+     "control": "Minimalne uprawnienia; wąskie narzędzia; dane uwierzytelniające ograniczone do użytkownika; człowiek w pętli"
+    },
+    {
+     "id": "LLM07",
+     "risk": "Wyciek promptu systemowego (System Prompt Leakage)",
+     "testIdea": "Spróbować wydobyć ukryte instrukcje; poszukać w nich danych logowania lub reguł wewnętrznych",
+     "control": "Brak sekretów w promptach; egzekwować reguły poza promptem"
+    },
+    {
+     "id": "LLM08",
+     "risk": "Słabości wektorów i osadzeń (Vector and Embedding Weaknesses)",
+     "testIdea": "Przetestować wyszukiwanie między najemcami, wstrzyknięte dokumenty i wyciek z osadzeń",
+     "control": "Kontrola dostępu do magazynów wektorów; kontrole przy pobieraniu; izolacja najemców"
+    },
+    {
+     "id": "LLM09",
+     "risk": "Dezinformacja (Misinformation)",
+     "testIdea": "Przeprowadzić kontrole odpowiedzi ugruntowanych i cytowań na zestawach pytań z dziedziny",
+     "control": "Ugruntowanie przez wyszukiwanie; przegląd przez człowieka; interfejsy sygnalizujące niepewność"
+    },
+    {
+     "id": "LLM10",
+     "risk": "Nieograniczone zużycie (Unbounded Consumption)",
+     "testIdea": "Przetestować długie dane wejściowe, niekontrolowane pętle agenta, limity częstotliwości i limity kosztów",
+     "control": "Limity, ograniczenia wejścia, limity czasu, monitorowanie"
+    }
+   ]
+  },
+  "socialEngineering": {
+   "columns": {
+    "technique": "Technika",
+    "howItWorks": "Jak działa",
+    "controls": "Główne zabezpieczenia",
+    "ethicalTest": "Etyczne podejście do testu"
+   },
+   "rows": [
+    {
+     "technique": "Phishing i spear-phishing",
+     "howItWorks": "Zwodnicza wiadomość nakłania do kliknięcia lub wpisania danych logowania",
+     "controls": "Filtrowanie poczty, MFA odporne na phishing, przycisk zgłaszania, szkolenie",
+     "ethicalTest": "Autoryzowane symulacje mierzące odsetek kliknięć, wpisań i zgłoszeń; nie zbierać prawdziwych haseł, chyba że uzgodniono"
+    },
+    {
+     "technique": "Phishing głosowy i podszywanie się pod pomoc techniczną",
+     "howItWorks": "Dzwoniący namawia pracowników do resetu lub ujawnienia",
+     "controls": "Weryfikacja przez oddzwonienie, skryptowane kontrole tożsamości",
+     "ethicalTest": "Rozmowy z pretekstem według scenariusza, uzgodnione z kierownictwem"
+    },
+    {
+     "technique": "Phishing SMS-owy",
+     "howItWorks": "Wiadomości tekstowe niosą przynęty i linki",
+     "controls": "Uświadamianie, zgłaszanie, filtrowanie mobilne",
+     "ethicalTest": "Symulowane wiadomości, po przeglądzie prywatności"
+    },
+    {
+     "technique": "Baiting (przynęta)",
+     "howItWorks": "Znaleziony pendrive lub kod QR kusi do użycia",
+     "controls": "Kontrola portów, polityka urządzeń, uświadamianie",
+     "ethicalTest": "Kontrolowane podrzucenie z nieszkodliwym znacznikiem"
+    },
+    {
+     "technique": "Tailgating (wejście „na ogon”)",
+     "howItWorks": "Podążanie za osobą uprawnioną przez drzwi",
+     "controls": "Dyscyplina w posługiwaniu się identyfikatorami, śluzy, kultura zaczepiania",
+     "ethicalTest": "Testy fizyczne z podpisanym listem upoważniającym noszonym przez cały czas"
+    },
+    {
+     "technique": "Business email compromise",
+     "howItWorks": "Podszywający się dyrektor lub dostawca prosi o płatność albo dane",
+     "controls": "Weryfikacja innym kanałem, podwójne zatwierdzenie",
+     "ethicalTest": "Przejście przez proces lub ćwiczenie stołowe"
+    },
+    {
+     "technique": "Zmęczenie MFA",
+     "howItWorks": "Powtarzane powiadomienia push, aż ktoś zatwierdzi",
+     "controls": "Dopasowanie liczb, limity częstotliwości, MFA odporne na phishing",
+     "ethicalTest": "Testować konfigurację, nie pracowników"
+    },
+    {
+     "technique": "Głos lub wideo deepfake",
+     "howItWorks": "Syntetyczne media podszywają się pod zaufaną osobę",
+     "controls": "Kody weryfikacyjne, procedury oddzwonienia",
+     "ethicalTest": "Ćwiczenie stołowe"
+    }
+   ]
+  },
+  "assessmentTypes": {
+   "columns": {
+    "type": "Rodzaj",
+    "question": "Na jakie pytanie odpowiada",
+    "depth": "Głębokość",
+    "notes": "Uwagi"
+   },
+   "rows": [
+    {
+     "type": "Ocena podatności",
+     "question": "Jakie słabości istnieją i jak są poważne?",
+     "depth": "Szeroka, głównie zautomatyzowana",
+     "notes": "Tania w powtarzaniu; wymaga ręcznej walidacji"
+    },
+    {
+     "type": "Test penetracyjny",
+     "question": "Co może osiągnąć atakujący w tym zakresie?",
+     "depth": "Głęboka w ramach zakresu",
+     "notes": "Ograniczony czasowo; dowodzi wpływu"
+    },
+    {
+     "type": "Red team",
+     "question": "Czy realistyczny przeciwnik może osiągnąć cel, nie zostając zatrzymanym?",
+     "depth": "Oparta na celu, często ukryta",
+     "notes": "Testuje wykrywanie i reakcję, nie tylko zapobieganie"
+    },
+    {
+     "type": "Purple team",
+     "question": "Jak szybko możemy wspólnie poprawić wykrywanie?",
+     "depth": "Współpracująca",
+     "notes": "Atakujący i obrońcy dzielą się każdym krokiem"
+    },
+    {
+     "type": "Polityka ujawniania i bug bounty",
+     "question": "Co z czasem znajdują zewnętrzni badacze?",
+     "depth": "Ciągła",
+     "notes": "Wymaga zdolności triażu i jasnego zakresu"
+    },
+    {
+     "type": "Test penetracyjny oparty na zagrożeniach",
+     "question": "Czy funkcja krytyczna wytrzymuje scenariusze oparte na wywiadzie?",
+     "depth": "Regulowana",
+     "notes": "TIBER-EU w finansach; testy oparte na zagrożeniach według DORA (sekcja 15)"
+    }
+   ]
+  },
+  "identifiersAndScoring": {
+   "columns": {
+    "signal": "Sygnał",
+    "answers": "Odpowiada na",
+    "source": "Źródło",
+    "caveat": "Zastrzeżenie"
+   },
+   "rows": [
+    {
+     "signal": "Identyfikator CVE",
+     "answers": "Która publicznie ujawniona podatność to jest?",
+     "source": "Program CVE; NVD dodaje wzbogacenie",
+     "caveat": "CISA przedłużyła umowę programu w kwietniu 2025 r. o 11 miesięcy; nie mogłem potwierdzić sytuacji w 2026 r., więc sprawdź cve.org"
+    },
+    {
+     "signal": "CWE",
+     "answers": "Jakiego rodzaju jest to słabość?",
+     "source": "MITRE CWE",
+     "caveat": "Tylko klasyfikacja, bez priorytetu"
+    },
+    {
+     "signal": "CVSS v4.0",
+     "answers": "Jak poważna jest wada techniczna?",
+     "source": "FIRST",
+     "url": "https://www.first.org/cvss/v4-0/",
+     "caveat": "Wynik bazowy to nie ryzyko i ignoruje Twoje środowisko"
+    },
+    {
+     "signal": "EPSS",
+     "answers": "Jak prawdopodobne jest wykorzystanie w ciągu 30 dni?",
+     "source": "FIRST",
+     "url": "https://www.first.org/epss/",
+     "caveat": "Model prawdopodobieństwa; nowe CVE mają mało historii"
+    },
+    {
+     "signal": "CISA KEV",
+     "answers": "Czy wykorzystanie jest już obserwowane?",
+     "source": "Katalog CISA",
+     "caveat": "Pokazuje, co jest znane jako wykorzystywane, a nie co jest bezpieczne"
+    },
+    {
+     "signal": "Wartość i ekspozycja zasobu",
+     "answers": "Jak bardzo ma to znaczenie tutaj?",
+     "source": "Twój inwentarz i model zagrożeń",
+     "caveat": "Tak dobre, jak inwentarz"
+    }
+   ]
+  },
+  "detectionChain": {
+   "columns": {
+    "link": "Ogniwo",
+    "what": "Czym jest",
+    "howToTest": "Jak je testować"
+   },
+   "rows": [
+    {
+     "link": "Telemetria",
+     "what": "Logi stacji końcowych, tożsamości, sieci, płaszczyzny sterowania chmury, aplikacji i poczty",
+     "howToTest": "Wykonać znane działania (nieudane logowania, zmiana uprawnień, akcja administratora, odczyt wrażliwych danych) i potwierdzić, że każde zostawia zapis z podmiotem, czasem, celem i wynikiem"
+    },
+    {
+     "link": "Zbieranie i integralność",
+     "what": "Centralny, zsynchronizowany czasowo, odporny na manipulacje magazyn z polityką retencji",
+     "howToTest": "Sprawdzić synchronizację zegarów i znaczniki czasu UTC; spróbować zmienić lub usunąć logi zwykłym kontem i kontem administratora; potwierdzić, że retencja odpowiada polityce"
+    },
+    {
+     "link": "Reguły wykrywania",
+     "what": "Logika SIEM lub EDR, często zapisana we wspólnym formacie, takim jak Sigma, i zmapowana na techniki ATT&CK",
+     "howToTest": "Odtworzyć nieszkodliwe symulacje techniki w laboratorium (np. Atomic Red Team) i sprawdzić, czy reguła się wyzwala; śledzić, które techniki nie mają reguły"
+    },
+    {
+     "link": "Triaż i reakcja",
+     "what": "Analitycy, runbooki, zgłoszenia, dyżury",
+     "howToTest": "Zmierzyć czas od zdarzenia przez alert do działania człowieka; sprawdzić, czy alerty docierają do kogoś, kto nie śpi"
+    },
+    {
+     "link": "Kondycja narzędzi",
+     "what": "Agenci, dostarczyciele logów, parsery",
+     "howToTest": "Alertować, gdy źródło milknie; testować po aktualizacjach"
+    }
+   ]
+  },
+  "frameworksAndLaws": {
+   "columns": {
+    "name": "Ramy lub ustawa",
+    "what": "Czym jest",
+    "hooks": "Punkty zaczepienia dla testerów"
+   },
+   "rows": [
+    {
+     "name": "NIST CSF 2.0",
+     "url": "https://www.nist.gov/cyberframework",
+     "what": "Dobrowolne ramy opublikowane w lutym 2024 r. z sześcioma funkcjami: Govern, Identify, Protect, Detect, Respond, Recover",
+     "hooks": "Ustrukturyzować program i jego wyniki testów; profile opisują stan bieżący i docelowy"
+    },
+    {
+     "name": "ISO/IEC 27001:2022 i 27002:2022",
+     "what": "Certyfikowalne wymagania SZBI i katalog 93 zabezpieczeń",
+     "hooks": "Zabezpieczenie 8.29 (testowanie bezpieczeństwa w rozwoju i odbiorze) oraz 8.8 (podatności techniczne); dowody audytu wewnętrznego. Numerów zabezpieczeń nie sprawdzano ponownie"
+    },
+    {
+     "name": "CIS Controls v8.1",
+     "what": "18 priorytetowych zabezpieczeń z grupami wdrożenia",
+     "hooks": "Praktyczna linia bazowa; testy penetracyjne i zarządzanie podatnościami są osobnymi zabezpieczeniami"
+    },
+    {
+     "name": "NIST SP 800-53 Rev. 5",
+     "what": "Katalog zabezpieczeń bezpieczeństwa i prywatności",
+     "hooks": "Testy penetracyjne (CA-8), skanowanie podatności (RA-5), testy programisty (SA-11). Identyfikatorów nie sprawdzano ponownie"
+    },
+    {
+     "name": "PCI DSS v4.0.1",
+     "what": "Standard bezpieczeństwa danych kart płatniczych",
+     "hooks": "Wymaganie 11: regularne skany, testy penetracyjne co najmniej raz w roku i po istotnej zmianie, testy segmentacji. Nie sprawdzano ponownie"
+    },
+    {
+     "name": "SOC 2",
+     "what": "Atest AICPA względem kryteriów usług zaufania",
+     "hooks": "Dowody zarządzania podatnościami, kontroli zmian i testowania"
+    },
+    {
+     "name": "RODO",
+     "what": "Unijne rozporządzenie o ochronie danych",
+     "hooks": "Artykuł 32 oczekuje bezpieczeństwa odpowiedniego do ryzyka, w tym regularnego testowania jego skuteczności; artykuł 33 wymaga zgłoszenia naruszenia organowi nadzorczemu w ciągu 72 godzin"
+    },
+    {
+     "name": "NIS2 (dyrektywa 2022/2555)",
+     "what": "Unijne zasady dla podmiotów kluczowych i ważnych",
+     "hooks": "Środki zarządzania ryzykiem obejmują ocenę własnej skuteczności; zgłoszenia incydentów przebiegają etapami 24 godzin, 72 godzin i jednego miesiąca. Transpozycja krajowa jest różna, więc sprawdź lokalne prawo"
+    },
+    {
+     "name": "DORA (rozporządzenie 2022/2554)",
+     "what": "Unijna cyfrowa odporność operacyjna dla podmiotów finansowych, stosowana od 17 stycznia 2025 r.",
+     "hooks": "Program testów odporności, z testami penetracyjnymi opartymi na zagrożeniach dla wyznaczonych podmiotów co najmniej raz na trzy lata"
+    },
+    {
+     "name": "Unijny akt o cyberodporności (Cyber Resilience Act)",
+     "url": "https://digital-strategy.ec.europa.eu/en/policies/cra-reporting",
+     "what": "Wymagania cyberbezpieczeństwa dla produktów z elementami cyfrowymi",
+     "hooks": "Od 11 września 2026 r. producenci zgłaszają aktywnie wykorzystywane podatności i poważne incydenty: wczesne ostrzeżenie w ciągu 24 godzin, powiadomienie w ciągu 72 godzin, raport końcowy 14 dni po udostępnieniu poprawki (lub miesiąc w przypadku poważnych incydentów), przez jedną platformę zgłoszeniową. Główne obowiązki obowiązują od grudnia 2027 r. (z pamięci)"
+    },
+    {
+     "name": "Unijny akt w sprawie AI (EU AI Act)",
+     "what": "Oparta na ryzyku regulacja systemów AI",
+     "hooks": "Zob. sekcja 11, gdzie podano przesunięte terminy dla wysokiego ryzyka"
+    }
+   ]
+  }
+ }
+}

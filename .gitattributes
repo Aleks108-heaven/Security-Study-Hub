@@ -1,0 +1,5 @@
+# Keep line endings stable so SHA256SUMS.txt verifies on every machine.
+* text=auto eol=lf
+*.png binary
+*.plugin binary
+*.skill binary

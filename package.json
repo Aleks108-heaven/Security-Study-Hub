@@ -1,0 +1,20 @@
+{
+  "name": "security-hub-app-source",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Source for the single-file Security Testing and Cybersecurity Study Hub app (vanilla JS, no runtime dependencies).",
+  "scripts": {
+    "build": "python build_app.py",
+    "check:data": "python validate_dataset.py security-hub-data.json && python test_validator.py security-hub-data.json security-hub-data.schema.json",
+    "check:i18n": "python validate_i18n.py",
+    "test": "node test/e2e.cjs",
+    "test:i18n": "node test/i18n.cjs",
+    "test:features": "node test/features.cjs",
+    "verify": "npm run check:data && npm run check:i18n && npm run build && npm test && npm run test:i18n && npm run test:features",
+    "shots": "node test/shots.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0",
+    "axe-core": "4.10.2"
+  }
+}

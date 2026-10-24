@@ -1,0 +1,47 @@
+ID,Group,Feature,Type,Test,Expected secure result,References
+LOGIN-01,"Authentication, recovery and sessions",Login,positive,Log in with valid credentials,Success; a new session ID is issued; no secrets shown,A07; ASVS V6
+LOGIN-02,"Authentication, recovery and sessions",Login,negative,"Log in with a wrong password, then with an unknown user",Same message and similar timing for both; no account enumeration,A07; CWE-203
+LOGIN-03,"Authentication, recovery and sessions",Login,boundary,"Fail the login N-1, N and N+1 times, where N is the lockout threshold",Throttling or lockout starts at the defined threshold; the real user can recover; lockout cannot be abused for easy denial of service,A07; CWE-307
+LOGIN-04,"Authentication, recovery and sessions",Login,boundary,"Set passwords of 7, 8, 14, 15, 64 and 65 characters, with spaces and Unicode","Rules match the policy (SP 800-63B-4: 15 minimum for single factor, 8 with MFA, 64 or more accepted); no composition rules",A07; NIST 800-63B-4
+LOGIN-05,"Authentication, recovery and sessions",Login,negative,Set a password from a public breach list,Rejected with a clear message,A07; NIST 800-63B-4
+LOGIN-06,"Authentication, recovery and sessions",Login,negative,"Send credentials over plain HTTP, then check redirects and headers",No credentials accepted over HTTP; HTTPS enforced; HSTS present,A04; CWE-319
+LOGIN-07,"Authentication, recovery and sessions",Login,negative,"With MFA on, request a post-login page directly without completing the second step",Access denied until the second factor is done,A07; CWE-306
+RESET-01,"Authentication, recovery and sessions",Password reset,positive,Request a reset for a valid account and for an unknown one,"Identical generic response; single-use, time-limited link",A07
+RESET-02,"Authentication, recovery and sessions",Password reset,negative,Reuse a reset link; use an expired one; use one issued before the password changed,Rejected each time,A07; CWE-640
+RESET-03,"Authentication, recovery and sessions",Password reset,negative,Alter the token or the user identifier inside the reset link,Rejected; no information about the account,A07; CWE-640
+RESET-04,"Authentication, recovery and sessions",Password reset,exploratory,"Request many resets for one account, then for many accounts",Rate limited; older tokens invalidated; user notified,A07
+SESS-01,"Authentication, recovery and sessions",Sessions,positive,Log in and inspect the session cookie,"Secure, HttpOnly and SameSite set; unpredictable value",ASVS V7
+SESS-02,"Authentication, recovery and sessions",Sessions,negative,Reuse an old session ID after logout and after a password change,Rejected: invalidation happens on the server,ASVS V7; CWE-613
+SESS-03,"Authentication, recovery and sessions",Sessions,boundary,Act one minute before and one minute after the idle and absolute timeouts,Session ends at the configured limits,ASVS V7
+SESS-04,"Authentication, recovery and sessions",Sessions,negative,"Set a known session ID before login, then log in",A new ID is issued at login; the old one is invalid,CWE-384
+SESS-05,"Authentication, recovery and sessions",Sessions,negative,Send a state-changing request from another origin without the anti-CSRF defence,Request refused,CWE-352
+AC-01,Access control and APIs,Access control,negative,"As user A, request user B's record by changing the identifier",403 or 404; no data returned,A01; API1; CWE-639
+AC-02,Access control and APIs,Access control,negative,"As a low-privilege user, call an administrative function through the UI route and the API",403; action not performed; attempt logged,A01; API5; CWE-862
+AC-03,Access control and APIs,Access control,negative,"Without logging in, request protected pages and files directly",401 or redirect; no content,A01; CWE-306
+AC-04,Access control and APIs,Access control,negative,"Add unexpected fields such as role, isAdmin or price to a profile update",Ignored or rejected; stored values unchanged,API3
+AC-05,Access control and APIs,Access control,exploratory,"Check export, search, reports, attachments, caches and WebSockets for another user's or tenant's objects",Same authorization as the main path,A01; API1
+AC-06,Access control and APIs,Access control,negative,"Downgrade a user's role, then replay a request made under the old role",Denied immediately,ASVS V8
+API-01,Access control and APIs,API,boundary,Send one request more than the rate limit allows,429 with a retry hint; limit applies per user or key,API4; CWE-770
+API-02,Access control and APIs,API,negative,Modify the payload of a signed token and send it,401; signature and claims validated,API2; CWE-347
+API-03,Access control and APIs,API,negative,Call an older API version or an undocumented endpoint seen in traffic,"Disabled, or protected like the current version",API9
+API-04,Access control and APIs,API,negative,"Send the wrong content type, wrong JSON types, a huge array and duplicate keys",Clean 4xx error; no stack trace; no crash,API8; A10
+INP-01,"Input handling, files and payments",Input handling,boundary,"In every text field try empty, 1 character, maximum length, maximum plus one, very long, Unicode and mixed encodings",Server-side validation; clean error; no silent truncation or corruption,CWE-20
+INP-02,"Input handling, files and payments",Input handling,negative,"Enter quote, angle-bracket, template and path-style characters in each field and watch responses and rendered output",Treated as data; no interpreter errors; output encoded for its context,A05; CWE-79; CWE-89
+INP-03,"Input handling, files and payments",Input handling,negative,"Store a harmless marker string with markup characters in names and comments, then view it as another user","Shown as text, never executed",A05; CWE-79
+INP-04,"Input handling, files and payments",Input handling,negative,"In a lab, give URL-type parameters (webhook, import, image fetch) local and internal addresses",Blocked by an allow-list,API7; CWE-918
+FILE-01,"Input handling, files and payments",File upload,positive,Upload a valid file exactly at the size limit,Accepted and stored safely,A06
+FILE-02,"Input handling, files and payments",File upload,boundary,"Upload the limit plus one byte, and a zero-byte file",Rejected with a clear error,CWE-434; CWE-770
+FILE-03,"Input handling, files and payments",File upload,negative,"Upload a disallowed type, a double extension and a file whose content does not match its declared type","Rejected on the server by content, not only by name",A06; CWE-434
+FILE-04,"Input handling, files and payments",File upload,negative,Upload the harmless EICAR antivirus test file,Detected and quarantined,Malware scanning
+FILE-05,"Input handling, files and payments",File upload,negative,"Fetch an uploaded file by direct URL as another user, and check that it is not executed",Authorization applies; served as data,A01
+PAY-01,"Input handling, files and payments",Payments,negative,"Change price, quantity, currency or discount in the request",The server recalculates from trusted data; mismatches rejected,A06
+PAY-02,"Input handling, files and payments",Payments,negative,"Replay a payment confirmation, skip a step, submit twice at once",Each order paid once; step order enforced,A06
+PAY-03,"Input handling, files and payments",Payments,boundary,"Use quantity 0, -1, maximum and maximum plus one, and amounts with many decimals",Rejected or handled per business rule,A06
+CFG-01,"Configuration, errors and logging",Configuration,negative,"Request default, admin and debug pages, directory listings and sample files",Not exposed,A02
+CFG-02,"Configuration, errors and logging",Configuration,positive,Inspect response headers on key pages,"HSTS, CSP, X-Content-Type-Options and Referrer-Policy present; no version banners",A02
+CFG-03,"Configuration, errors and logging",Configuration,negative,Scan the TLS configuration,TLS 1.2 or later only; strong ciphers; valid certificate chain,A04
+ERR-01,"Configuration, errors and logging",Errors,negative,Force errors with malformed requests and a dependency timeout,Generic message plus a request ID; no stack trace,A10; CWE-209
+ERR-02,"Configuration, errors and logging",Errors,negative,"Make the authorization check itself fail, for example by making the policy service unavailable",Access denied: the system fails closed,A10; CWE-636
+LOG-01,"Configuration, errors and logging",Logging and alerting,positive,"Perform a failed login, an access denial, a role change and an admin action","Each is logged with actor, time, source and result; no secrets",A09; CWE-778
+LOG-02,"Configuration, errors and logging",Logging and alerting,negative,Put newline and control characters in a field that gets logged,Neutralised in the log,A09; CWE-117
+LOG-03,"Configuration, errors and logging",Logging and alerting,positive,"Trigger a defined alert condition, such as ten failed logins",The alert reaches the on-call person within the target time,A09

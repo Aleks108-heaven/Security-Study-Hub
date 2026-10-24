@@ -1,0 +1,280 @@
+{
+ "testcases": {
+  "LOGIN-01": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Inicio de sesión",
+   "test": "Iniciar sesión con credenciales válidas",
+   "expected": "Éxito; se emite un nuevo ID de sesión; no se muestran secretos"
+  },
+  "LOGIN-02": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Inicio de sesión",
+   "test": "Iniciar sesión con una contraseña incorrecta y luego con un usuario desconocido",
+   "expected": "Mismo mensaje y tiempo similar en ambos casos; sin enumeración de cuentas"
+  },
+  "LOGIN-03": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Inicio de sesión",
+   "test": "Fallar el inicio de sesión N-1, N y N+1 veces, donde N es el umbral de bloqueo",
+   "expected": "La limitación o el bloqueo empieza en el umbral definido; el usuario real puede recuperarse; el bloqueo no se puede abusar fácilmente para denegación de servicio"
+  },
+  "LOGIN-04": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Inicio de sesión",
+   "test": "Establecer contraseñas de 7, 8, 14, 15, 64 y 65 caracteres, con espacios y Unicode",
+   "expected": "Las reglas coinciden con la política (SP 800-63B-4: 15 como mínimo con un factor, 8 con MFA, se aceptan 64 o más); sin reglas de composición"
+  },
+  "LOGIN-05": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Inicio de sesión",
+   "test": "Establecer una contraseña de una lista pública de filtraciones",
+   "expected": "Rechazada con un mensaje claro"
+  },
+  "LOGIN-06": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Inicio de sesión",
+   "test": "Enviar credenciales por HTTP simple y luego revisar redirecciones y cabeceras",
+   "expected": "No se aceptan credenciales por HTTP; HTTPS forzado; HSTS presente"
+  },
+  "LOGIN-07": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Inicio de sesión",
+   "test": "Con MFA activado, pedir directamente una página posterior al inicio de sesión sin completar el segundo paso",
+   "expected": "Acceso denegado hasta completar el segundo factor"
+  },
+  "RESET-01": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Restablecimiento de contraseña",
+   "test": "Solicitar un restablecimiento para una cuenta válida y para una desconocida",
+   "expected": "Respuesta genérica idéntica; enlace de un solo uso y con tiempo limitado"
+  },
+  "RESET-02": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Restablecimiento de contraseña",
+   "test": "Reutilizar un enlace de restablecimiento; usar uno caducado; usar uno emitido antes del cambio de contraseña",
+   "expected": "Rechazado en cada caso"
+  },
+  "RESET-03": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Restablecimiento de contraseña",
+   "test": "Alterar el token o el identificador de usuario dentro del enlace de restablecimiento",
+   "expected": "Rechazado; sin información sobre la cuenta"
+  },
+  "RESET-04": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Restablecimiento de contraseña",
+   "test": "Solicitar muchos restablecimientos para una cuenta y luego para muchas cuentas",
+   "expected": "Con límite de frecuencia; tokens anteriores invalidados; usuario notificado"
+  },
+  "SESS-01": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Sesiones",
+   "test": "Iniciar sesión e inspeccionar la cookie de sesión",
+   "expected": "Secure, HttpOnly y SameSite activados; valor impredecible"
+  },
+  "SESS-02": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Sesiones",
+   "test": "Reutilizar un ID de sesión antiguo tras cerrar sesión y tras cambiar la contraseña",
+   "expected": "Rechazado: la invalidación ocurre en el servidor"
+  },
+  "SESS-03": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Sesiones",
+   "test": "Actuar un minuto antes y un minuto después de los tiempos de inactividad y absoluto",
+   "expected": "La sesión termina en los límites configurados"
+  },
+  "SESS-04": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Sesiones",
+   "test": "Establecer un ID de sesión conocido antes del inicio de sesión y luego iniciar sesión",
+   "expected": "Se emite un ID nuevo al iniciar sesión; el anterior no es válido"
+  },
+  "SESS-05": {
+   "group": "Autenticación, recuperación y sesiones",
+   "feature": "Sesiones",
+   "test": "Enviar una petición que cambia el estado desde otro origen sin la defensa anti-CSRF",
+   "expected": "Petición rechazada"
+  },
+  "AC-01": {
+   "group": "Control de acceso y API",
+   "feature": "Control de acceso",
+   "test": "Como usuario A, pedir el registro del usuario B cambiando el identificador",
+   "expected": "403 o 404; no se devuelven datos"
+  },
+  "AC-02": {
+   "group": "Control de acceso y API",
+   "feature": "Control de acceso",
+   "test": "Como usuario con pocos privilegios, llamar a una función administrativa por la ruta de la interfaz y por la API",
+   "expected": "403; acción no realizada; intento registrado"
+  },
+  "AC-03": {
+   "group": "Control de acceso y API",
+   "feature": "Control de acceso",
+   "test": "Sin iniciar sesión, pedir directamente páginas y archivos protegidos",
+   "expected": "401 o redirección; sin contenido"
+  },
+  "AC-04": {
+   "group": "Control de acceso y API",
+   "feature": "Control de acceso",
+   "test": "Añadir campos inesperados como role, isAdmin o price a una actualización de perfil",
+   "expected": "Ignorados o rechazados; valores almacenados sin cambios"
+  },
+  "AC-05": {
+   "group": "Control de acceso y API",
+   "feature": "Control de acceso",
+   "test": "Revisar exportación, búsqueda, informes, adjuntos, cachés y WebSockets en busca de objetos de otro usuario o inquilino",
+   "expected": "La misma autorización que en la ruta principal"
+  },
+  "AC-06": {
+   "group": "Control de acceso y API",
+   "feature": "Control de acceso",
+   "test": "Degradar el rol de un usuario y luego repetir una petición hecha con el rol anterior",
+   "expected": "Denegada de inmediato"
+  },
+  "API-01": {
+   "group": "Control de acceso y API",
+   "feature": "API",
+   "test": "Enviar una petición más de las que permite el límite de frecuencia",
+   "expected": "429 con indicación de reintento; el límite se aplica por usuario o clave"
+  },
+  "API-02": {
+   "group": "Control de acceso y API",
+   "feature": "API",
+   "test": "Modificar la carga de un token firmado y enviarlo",
+   "expected": "401; firma y declaraciones validadas"
+  },
+  "API-03": {
+   "group": "Control de acceso y API",
+   "feature": "API",
+   "test": "Llamar a una versión anterior de la API o a un endpoint no documentado visto en el tráfico",
+   "expected": "Desactivado o protegido igual que la versión actual"
+  },
+  "API-04": {
+   "group": "Control de acceso y API",
+   "feature": "API",
+   "test": "Enviar el tipo de contenido erróneo, tipos JSON erróneos, un array enorme y claves duplicadas",
+   "expected": "Error 4xx limpio; sin traza de pila; sin caída"
+  },
+  "INP-01": {
+   "group": "Gestión de entradas, archivos y pagos",
+   "feature": "Gestión de entradas",
+   "test": "En cada campo de texto probar vacío, 1 carácter, longitud máxima, máximo más uno, muy largo, Unicode y codificaciones mezcladas",
+   "expected": "Validación en el servidor; error limpio; sin truncamiento ni corrupción silenciosos"
+  },
+  "INP-02": {
+   "group": "Gestión de entradas, archivos y pagos",
+   "feature": "Gestión de entradas",
+   "test": "Introducir en cada campo comillas, corchetes angulares, caracteres de plantilla y de ruta, y observar las respuestas y la salida renderizada",
+   "expected": "Tratados como datos; sin errores del intérprete; salida codificada para su contexto"
+  },
+  "INP-03": {
+   "group": "Gestión de entradas, archivos y pagos",
+   "feature": "Gestión de entradas",
+   "test": "Guardar una cadena marcadora inofensiva con caracteres de marcado en nombres y comentarios y verla como otro usuario",
+   "expected": "Mostrada como texto, nunca ejecutada"
+  },
+  "INP-04": {
+   "group": "Gestión de entradas, archivos y pagos",
+   "feature": "Gestión de entradas",
+   "test": "En un laboratorio, dar direcciones locales e internas a parámetros de tipo URL (webhook, importación, descarga de imágenes)",
+   "expected": "Bloqueadas por una lista de permitidos"
+  },
+  "FILE-01": {
+   "group": "Gestión de entradas, archivos y pagos",
+   "feature": "Carga de archivos",
+   "test": "Cargar un archivo válido justo en el límite de tamaño",
+   "expected": "Aceptado y almacenado de forma segura"
+  },
+  "FILE-02": {
+   "group": "Gestión de entradas, archivos y pagos",
+   "feature": "Carga de archivos",
+   "test": "Cargar el límite más un byte y un archivo de cero bytes",
+   "expected": "Rechazado con un error claro"
+  },
+  "FILE-03": {
+   "group": "Gestión de entradas, archivos y pagos",
+   "feature": "Carga de archivos",
+   "test": "Cargar un tipo no permitido, una doble extensión y un archivo cuyo contenido no coincide con su tipo declarado",
+   "expected": "Rechazado en el servidor por contenido, no solo por nombre"
+  },
+  "FILE-04": {
+   "group": "Gestión de entradas, archivos y pagos",
+   "feature": "Carga de archivos",
+   "test": "Cargar el archivo de prueba antivirus EICAR, inofensivo",
+   "expected": "Detectado y puesto en cuarentena"
+  },
+  "FILE-05": {
+   "group": "Gestión de entradas, archivos y pagos",
+   "feature": "Carga de archivos",
+   "test": "Obtener un archivo cargado por URL directa como otro usuario y comprobar que no se ejecuta",
+   "expected": "Se aplica la autorización; servido como datos"
+  },
+  "PAY-01": {
+   "group": "Gestión de entradas, archivos y pagos",
+   "feature": "Pagos",
+   "test": "Cambiar precio, cantidad, moneda o descuento en la petición",
+   "expected": "El servidor recalcula a partir de datos de confianza; discrepancias rechazadas"
+  },
+  "PAY-02": {
+   "group": "Gestión de entradas, archivos y pagos",
+   "feature": "Pagos",
+   "test": "Repetir una confirmación de pago, saltar un paso, enviar dos veces a la vez",
+   "expected": "Cada pedido se paga una vez; orden de pasos exigido"
+  },
+  "PAY-03": {
+   "group": "Gestión de entradas, archivos y pagos",
+   "feature": "Pagos",
+   "test": "Usar cantidad 0, -1, máximo y máximo más uno, e importes con muchos decimales",
+   "expected": "Rechazado o tratado según la regla de negocio"
+  },
+  "CFG-01": {
+   "group": "Configuración, errores y registro",
+   "feature": "Configuración",
+   "test": "Pedir páginas predeterminadas, de administración y de depuración, listados de directorios y archivos de ejemplo",
+   "expected": "No expuestos"
+  },
+  "CFG-02": {
+   "group": "Configuración, errores y registro",
+   "feature": "Configuración",
+   "test": "Inspeccionar las cabeceras de respuesta de las páginas clave",
+   "expected": "HSTS, CSP, X-Content-Type-Options y Referrer-Policy presentes; sin banners de versión"
+  },
+  "CFG-03": {
+   "group": "Configuración, errores y registro",
+   "feature": "Configuración",
+   "test": "Escanear la configuración TLS",
+   "expected": "Solo TLS 1.2 o posterior; cifrados fuertes; cadena de certificados válida"
+  },
+  "ERR-01": {
+   "group": "Configuración, errores y registro",
+   "feature": "Errores",
+   "test": "Forzar errores con peticiones mal formadas y un tiempo de espera agotado de una dependencia",
+   "expected": "Mensaje genérico más un ID de petición; sin traza de pila"
+  },
+  "ERR-02": {
+   "group": "Configuración, errores y registro",
+   "feature": "Errores",
+   "test": "Hacer que falle la propia comprobación de autorización, por ejemplo dejando no disponible el servicio de políticas",
+   "expected": "Acceso denegado: el sistema falla en modo cerrado"
+  },
+  "LOG-01": {
+   "group": "Configuración, errores y registro",
+   "feature": "Registro y alertas",
+   "test": "Realizar un inicio de sesión fallido, una denegación de acceso, un cambio de rol y una acción de administración",
+   "expected": "Cada uno se registra con actor, hora, origen y resultado; sin secretos"
+  },
+  "LOG-02": {
+   "group": "Configuración, errores y registro",
+   "feature": "Registro y alertas",
+   "test": "Poner saltos de línea y caracteres de control en un campo que se registra",
+   "expected": "Neutralizados en el registro"
+  },
+  "LOG-03": {
+   "group": "Configuración, errores y registro",
+   "feature": "Registro y alertas",
+   "test": "Provocar una condición de alerta definida, como diez inicios de sesión fallidos",
+   "expected": "La alerta llega a la persona de guardia dentro del tiempo objetivo"
+  }
+ }
+}
