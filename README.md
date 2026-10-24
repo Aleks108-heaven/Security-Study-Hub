@@ -11,6 +11,7 @@ The app is plain HTML, CSS and JavaScript with no runtime dependencies and no fr
 | Locally | Open `security-hub-study-app.html` in a browser. It is one complete page and needs no server. Progress is saved in that browser. |
 | Online (GitHub Pages) | Push to `main`; `.github/workflows/pages.yml` publishes the page. Switch it on once under Settings > Pages > Source: GitHub Actions. |
 | Online (claude.ai artifact) | Run `python build_app.py` and publish `dist/hub-app.html`, the fragment form. The optional private sync and file downloads work only there. |
+https://claude.ai/artifact/JBt9y2eJ4BDsUHM3c4kZAq#home
 
 ## What the app does
 
